@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection Doctor 🩺</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
+        .card { border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        h1 { color: #2563eb; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        button:hover { background: #1d4ed8; }
+        pre { background: #f1f5f9; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 14px; border: 1px solid #e2e8f0; }
+        .status { font-weight: bold; margin-bottom: 10px; }
+        .status.pending { color: #ca8a04; }
+        .status.success { color: #16a34a; }
+        .status.error { color: #dc2626; }
+        input { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <h1>🩺 Connection Doctor</h1>
+    <p>This tool helps diagnose why your React app can't talk to Google Sheets.</p>
+
+    <div class="card">
+        <h3>1. Configuration</h3>
+        <label><strong>Google Web App URL:</strong></label>
+        <input type="text" id="urlInput" value="https://script.google.com/macros/s/AKfycbxNQXjYsxdqzpzVbbzeyvzrAANpOsj3YT7CR8jQ-ObRKwNj76p2ud2AB8RYZnGnbYn16A/exec" />
+        <p style="font-size: 0.9em; color: #666;">Make sure this URL matches exactly what is in your deployment.</p>
+    </div>
+
+    <div class="card">
+        <h3>2. Test Actions</h3>
+        <p>Click these buttons in order:</p>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <button onclick="testRead()">1. Test READ (Get Stats)</button>
+            <button onclick="testWrite()">2. Test WRITE (Add Row)</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const log = (msg, type = 'info') => {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            
+            let color = '#334155';
+            if (type === 'error') color = '#dc2626';
+            if (type === 'success') color = '#16a34a';
+            
+            div.innerHTML = `<div style="color:${color}; margin-bottom: 5px;">
+                <strong>${new Date().toLocaleTimeString()} [${type.toUpperCase()}]:</strong> ${msg}
+            </div>`;
+            results.appendChild(div);
+            console.log(msg);
+        };
+
+        async function testRead() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) return log('URL is empty!', 'error');
+
+            log('Attempting to fetch stats...', 'info');
+            
+            try {
+                // Add cache buster
+                const response = await fetch(`${url}?t=${Date.now()}`);
+                
+                log(`Response Status: ${response.status}`, response.ok ? 'info' : 'error');
+                
+                const text = await response.text();
+                log(`Raw Response: ${text.substring(0, 100)}...`, 'info');
+
+                try {
+                    const data = JSON.parse(text);
+                    log(`✅ SUCCESS! Parsed Data: ${JSON.stringify(data)}`, 'success');
+                } catch(e) {
+                    log(`❌ FAILED to parse JSON. Is the script returning HTML? Check permissions!`, 'error');
+                }
+
+            } catch (err) {
+                log(`❌ NETWORK ERROR: ${err.message}`, 'error');
+                log('Possible causes: CORS issues, strict network, or wrong URL.', 'error');
+            }
+        }
+
+        async function testWrite() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) return log('URL is empty!', 'error');
+
+            const payload = {
+                name: "Test User",
+                phone: "01700000000",
+                package: "debug-test",
+                paymentMethod: "debug",
+                transactionId: "DEBUG123",
+                lastTwoDigit: "99",
+                amount: 10
+            };
+
+            log('Attempting to write data...', 'info');
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    redirect: "follow",
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+
+                log(`Response Status: ${response.status}`, response.ok ? 'info' : 'error');
+                
+                const text = await response.text();
+                log(`Raw Response: ${text.substring(0, 100)}...`, 'info');
+
+                try {
+                    const data = JSON.parse(text);
+                    if (data.success || data.result === 'success') {
+                        log(`✅ SUCCESS! Data saved. Check your Google Sheet now!`, 'success');
+                    } else {
+                        log(`⚠️ Server returned error: ${JSON.stringify(data)}`, 'error');
+                    }
+                } catch(e) {
+                    log(`❌ FAILED to parse JSON.`, 'error');
+                }
+
+            } catch (err) {
+                log(`❌ NETWORK ERROR: ${err.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
