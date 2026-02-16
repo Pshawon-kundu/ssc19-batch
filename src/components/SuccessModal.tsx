@@ -47,7 +47,7 @@ export function SuccessModal({ isOpen, onClose, registrationData }: SuccessModal
               </button>
 
               {/* Success Icon */}
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-10">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
