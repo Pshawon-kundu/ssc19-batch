@@ -5,6 +5,7 @@ import { Packages } from './components/Packages';
 import { RegistrationForm } from './components/RegistrationForm';
 import { Footer } from './components/Footer';
 import { SuccessModal } from './components/SuccessModal';
+import { ErrorModal } from './components/ErrorModal';
 import { submitRegistration, fetchStats } from './api';
 import type { RegistrationData } from './api';
 
@@ -15,6 +16,8 @@ export default function App() {
   const [totalRegistered, setTotalRegistered] = useState(0);
   const [totalMoney, setTotalMoney] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastRegistration, setLastRegistration] = useState<RegistrationData | undefined>(undefined);
   const [isLoadingStats, setIsLoadingStats] = useState(true);
@@ -74,7 +77,10 @@ export default function App() {
 
     } catch (error) {
       console.error('Submission error:', error);
-      alert(error instanceof Error ? error.message : 'Registration failed. Please try again.');
+      setErrorMessage(error instanceof Error ? error.message : 'Registration failed');
+      setShowError(true);
+      // Re-throw so the form component can handle it (e.g. stop loading state)
+      throw error;
     } finally {
       setIsSubmitting(false);
     }
@@ -118,6 +124,12 @@ export default function App() {
         isOpen={showSuccess}
         onClose={() => setShowSuccess(false)}
         registrationData={lastRegistration}
+      />
+
+      <ErrorModal
+        isOpen={showError}
+        onClose={() => setShowError(false)}
+        message={errorMessage}
       />
     </div>
   );
