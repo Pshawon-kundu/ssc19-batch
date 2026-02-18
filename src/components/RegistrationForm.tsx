@@ -115,22 +115,33 @@ export function RegistrationForm({ selectedPackage, onSubmit, isSubmitting }: Re
     // Update local state to match
     setFormData(prev => ({ ...prev, amount: currentAmount }));
 
-    await onSubmit(dataToSubmit);
+    try {
+      await onSubmit(dataToSubmit);
 
-    // Reset form
-    setFormData({
-      name: '',
-      phone: '',
-      package: 'iftar-only',
-      jerseySize: undefined,
-      jerseyName: '',
-      jerseyNumber: '',
-      paymentMethod: '',
-      transactionId: '',
-      lastTwoDigit: '',
-      amount: config.packagePrices['iftar-only'],
-    });
-    setErrors({});
+      // Reset form ONLY on success
+      setFormData({
+        name: '',
+        phone: '',
+        package: 'iftar-only',
+        jerseySize: undefined,
+        jerseyName: '',
+        jerseyNumber: '',
+        paymentMethod: '',
+        transactionId: '',
+        lastTwoDigit: '',
+        amount: config.packagePrices['iftar-only'],
+      });
+      setErrors({});
+    } catch (error) {
+      // Handle error (e.g. duplicate phone)
+      const message = error instanceof Error ? error.message : "Registration failed";
+
+      if (message.includes("registered")) {
+        setErrors(prev => ({ ...prev, phone: message }));
+      } else {
+        setErrors(prev => ({ ...prev, submit: message }));
+      }
+    }
   };
 
   const handleChange = (field: keyof RegistrationData, value: any) => {
@@ -201,6 +212,7 @@ export function RegistrationForm({ selectedPackage, onSubmit, isSubmitting }: Re
                   maxLength={11}
                 />
                 {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                {errors.submit && <p className="text-red-500 text-sm mt-1">{errors.submit}</p>}
               </div>
 
               {/* Package Selection */}
@@ -285,7 +297,7 @@ export function RegistrationForm({ selectedPackage, onSubmit, isSubmitting }: Re
                         maxLength={15}
                         className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors uppercase ${errors.jerseyName ? 'border-red-500' : 'border-gray-200'
                           }`}
-                        placeholder="Kalu"
+                        placeholder="RAHIM"
                       />
                       <div className="flex items-center justify-between mt-1">
                         {errors.jerseyName ? (
