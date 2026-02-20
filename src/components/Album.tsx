@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
-import { Image, X, ArrowUp } from "lucide-react";
-import { useState } from "react";
+import { Image, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import photo1 from "../assets/1.jpeg";
 import photo2 from "../assets/2.jpeg";
 import photo3 from "../assets/3.jpeg";
@@ -21,24 +22,33 @@ interface AlbumProps {
 
 export function Album({ onClose }: AlbumProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
+  const navigate = useNavigate();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (selectedPhoto === null) return;
     const currentIdx = ALBUM_PHOTOS.findIndex((p) => p.id === selectedPhoto);
     const nextIdx = (currentIdx + 1) % ALBUM_PHOTOS.length;
     setSelectedPhoto(ALBUM_PHOTOS[nextIdx].id);
-  };
+  }, [selectedPhoto]);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     if (selectedPhoto === null) return;
     const currentIdx = ALBUM_PHOTOS.findIndex((p) => p.id === selectedPhoto);
     const prevIdx = currentIdx === 0 ? ALBUM_PHOTOS.length - 1 : currentIdx - 1;
     setSelectedPhoto(ALBUM_PHOTOS[prevIdx].id);
-  };
+  }, [selectedPhoto]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (selectedPhoto === null) return;
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "Escape") setSelectedPhoto(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selectedPhoto, handleNext, handlePrev]);
 
   const carouselWidth = (400 + 24) * ALBUM_PHOTOS.length;
 
@@ -59,16 +69,11 @@ export function Album({ onClose }: AlbumProps) {
           <motion.button
             whileHover={{ scale: 1.05, x: -4 }}
             whileTap={{ scale: 0.95 }}
-            onClick={scrollToTop}
+            onClick={() => navigate("/")}
             className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-semibold mb-8 group"
           >
-            <motion.div
-              animate={{ x: [0, -4, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              ←
-            </motion.div>
-            <span>Back to Top</span>
+            <ChevronLeft size={20} />
+            <span>Back to Home</span>
           </motion.button>
 
           <div className="flex items-center gap-3 mb-6">
@@ -217,17 +222,18 @@ export function Album({ onClose }: AlbumProps) {
                 onClick={() => setSelectedPhoto(null)}
                 className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-full transition-all duration-300"
               >
-                <X size={32} className="text-white" />
+                <X size={24} className="text-white" />
               </motion.button>
 
-              {/* Back to Top Button */}
+              {/* Back Button */}
               <motion.button
-                whileHover={{ scale: 1.15 }}
+                whileHover={{ scale: 1.05, x: -3 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={scrollToTop}
-                className="absolute top-4 left-4 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-full transition-all duration-300 hidden sm:block"
+                onClick={() => setSelectedPhoto(null)}
+                className="absolute top-4 left-4 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2"
               >
-                <ArrowUp size={32} className="text-white" />
+                <ChevronLeft size={20} className="text-white" />
+                <span className="text-white text-sm font-semibold">Back</span>
               </motion.button>
 
               {/* Image */}
@@ -255,7 +261,7 @@ export function Album({ onClose }: AlbumProps) {
                   onClick={handlePrev}
                   className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  ← Previous
+                  <ChevronLeft size={18} /> Previous
                 </motion.button>
 
                 {/* Image Counter */}
@@ -301,13 +307,14 @@ export function Album({ onClose }: AlbumProps) {
                   onClick={handleNext}
                   className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  Next →
+                  Next <ChevronRight size={18} />
                 </motion.button>
               </div>
 
-              {/* Mobile Navigation Hint */}
-              <p className="text-center text-white/60 text-sm mt-4">
-                Use arrow keys or buttons to navigate
+              {/* Navigation Hint */}
+              <p className="text-center text-white/50 text-xs mt-4">
+                Use arrow keys or swipe buttons to navigate &nbsp;·&nbsp; Press
+                Esc to close
               </p>
             </motion.div>
           </motion.div>
