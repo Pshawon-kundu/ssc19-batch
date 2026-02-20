@@ -4,7 +4,6 @@ import {
   Users,
   Banknote,
   Sparkles,
-  Target,
   Moon,
   ArrowRight,
   TrendingUp,
@@ -12,7 +11,6 @@ import {
 import { motion } from "motion/react";
 import { CountdownTimer } from "./CountdownTimer";
 import { TestimonialCarousel } from "./TestimonialCarousel";
-import { PhotoPreview } from "./PhotoPreview";
 
 interface HeroProps {
   totalRegistered: number;
@@ -345,9 +343,6 @@ export function Hero({
 
         {/* Testimonials */}
         <TestimonialCarousel />
-
-        {/* Photo Preview */}
-        <PhotoPreview totalRegistered={totalRegistered} />
       </div>
     </section>
   );
