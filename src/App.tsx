@@ -3,6 +3,7 @@ import { Navigation } from "./components/Navigation";
 import { Hero } from "./components/Hero";
 import { Packages } from "./components/Packages";
 import { RegistrationForm } from "./components/RegistrationForm";
+import { Album } from "./components/Album";
 import { Footer } from "./components/Footer";
 import { SuccessModal } from "./components/SuccessModal";
 import { ErrorModal } from "./components/ErrorModal";
@@ -133,6 +134,8 @@ export default function App() {
         onSubmit={handleRegistrationSubmit}
         isSubmitting={isSubmitting}
       />
+
+      <Album />
 
       <Footer />
 
