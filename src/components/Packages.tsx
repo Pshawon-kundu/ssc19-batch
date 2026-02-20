@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react';
+import { Check, ArrowUp } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { PackageType } from '../App';
 
@@ -65,12 +65,54 @@ const packages = [
 ];
 
 export function Packages({ selectedPackage, onSelectPackage }: PackagesProps) {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section id="packages" className="py-20 bg-white">
+    <section id="packages" className="py-20 bg-gradient-to-br from-white to-emerald-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Choose Your Package</h2>
-          <p className="text-xl text-gray-600">Select the package that suits you best</p>
+        {/* Navigation Buttons */}
+        <div className="flex items-center justify-between mb-12">
+          <motion.button
+            whileHover={{ scale: 1.05, x: -4 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection('home')}
+            className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-semibold group"
+          >
+            <motion.div
+              animate={{ x: [0, -4, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              ←
+            </motion.div>
+            <span>Back to Home</span>
+          </motion.button>
+
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+              Choose Your Package
+            </h2>
+            <p className="text-gray-600">Select the package that suits you best</p>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.05, x: 4 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection('album')}
+            className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-semibold group"
+          >
+            <span>View Album</span>
+            <motion.div
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              →
+            </motion.div>
+          </motion.button>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

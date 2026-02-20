@@ -1,8 +1,28 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer id="contact" className="bg-gradient-to-br from-emerald-900 to-emerald-800 text-white py-12">
+    <footer id="contact" className="bg-gradient-to-br from-emerald-900 to-emerald-800 text-white py-12 relative">
+      {/* Back to Top Button */}
+      <motion.button
+        whileHover={{ scale: 1.15, y: -4 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={scrollToTop}
+        className="absolute right-6 sm:right-8 -top-8 bg-emerald-600 hover:bg-emerald-500 p-3 rounded-full shadow-lg transition-all duration-300"
+      >
+        <motion.div
+          animate={{ y: [0, -4, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ArrowUp size={24} className="text-white" />
+        </motion.div>
+      </motion.button>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* About */}
