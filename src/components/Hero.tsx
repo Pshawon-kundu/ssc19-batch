@@ -46,6 +46,262 @@ export function Hero({
         />
       </div>
 
+      {/* ── Ramadan Lantern Garland ── */}
+      <div
+        className="absolute left-0 w-full pointer-events-none overflow-hidden"
+        style={{ top: "5rem", height: "240px" }}
+      >
+        {/* Rope */}
+        <div
+          className="absolute top-0 left-0 w-full"
+          style={{
+            height: "3px",
+            background:
+              "linear-gradient(90deg,#92400e,#b45309,#d97706,#b45309,#92400e)",
+            opacity: 0.7,
+          }}
+        />
+
+        {/* ── Lantern SVG definitions (reusable shapes) ── */}
+        {/* Large golden lantern */}
+        {[
+          { left: "5%", strH: 55, scale: 1, delay: 0, dur: 3.6, dir: 1 },
+          {
+            left: "16%",
+            strH: 100,
+            scale: 1.15,
+            delay: 0.5,
+            dur: 4.1,
+            dir: -1,
+          },
+          { left: "28%", strH: 70, scale: 0.85, delay: 1.1, dur: 3.3, dir: 1 },
+          { left: "40%", strH: 120, scale: 1.1, delay: 0.3, dur: 4.5, dir: -1 },
+          { left: "50%", strH: 60, scale: 0.9, delay: 0.8, dur: 3.8, dir: 1 },
+          { left: "61%", strH: 110, scale: 1.2, delay: 0.2, dur: 4.2, dir: -1 },
+          { left: "72%", strH: 80, scale: 0.88, delay: 1.3, dur: 3.5, dir: 1 },
+          { left: "83%", strH: 95, scale: 1.05, delay: 0.6, dur: 4.0, dir: -1 },
+          { left: "93%", strH: 50, scale: 0.82, delay: 1.0, dur: 3.7, dir: 1 },
+        ].map((l, i) => (
+          <motion.div
+            key={`lantern-${i}`}
+            className="absolute top-0 flex flex-col items-center"
+            style={{ left: l.left, transformOrigin: "top center" }}
+            animate={{ rotate: [l.dir * 6, l.dir * -6, l.dir * 6] }}
+            transition={{
+              duration: l.dur,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: l.delay,
+            }}
+          >
+            {/* hanging string */}
+            <div
+              style={{
+                width: "1.5px",
+                height: `${l.strH}px`,
+                background: "#92400e",
+                opacity: 0.75,
+              }}
+            />
+            {/* lantern body */}
+            <motion.div
+              animate={{ opacity: [0.85, 1, 0.85] }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: l.delay,
+              }}
+              style={{
+                transform: `scale(${l.scale})`,
+                transformOrigin: "top center",
+              }}
+            >
+              <svg width="46" height="74" viewBox="0 0 46 74" fill="none">
+                <defs>
+                  <radialGradient id={`gl${i}`} cx="50%" cy="55%" r="50%">
+                    <stop offset="0%" stopColor="#fef9c3" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="#fbbf24" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                {/* hook ring */}
+                <circle
+                  cx="23"
+                  cy="3"
+                  r="3"
+                  stroke="#92400e"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                {/* chain */}
+                <line
+                  x1="23"
+                  y1="6"
+                  x2="23"
+                  y2="10"
+                  stroke="#b45309"
+                  strokeWidth="1.5"
+                />
+                {/* top cap */}
+                <polygon points="12,14 23,9 34,14 37,21 9,21" fill="#b45309" />
+                <line
+                  x1="9"
+                  y1="18"
+                  x2="37"
+                  y2="18"
+                  stroke="#92400e"
+                  strokeWidth="1"
+                  opacity="0.7"
+                />
+                {/* top band */}
+                <rect
+                  x="9"
+                  y="21"
+                  width="28"
+                  height="4"
+                  rx="1"
+                  fill="#d97706"
+                />
+                {/* body */}
+                <path
+                  d="M9 25 L6 58 L10 65 L23 67 L36 65 L40 58 L37 25 Z"
+                  fill="#fbbf24"
+                />
+                {/* inner glow */}
+                <path
+                  d="M9 25 L6 58 L10 65 L23 67 L36 65 L40 58 L37 25 Z"
+                  fill={`url(#gl${i})`}
+                />
+                {/* vertical ribs */}
+                <line
+                  x1="14"
+                  y1="25"
+                  x2="12"
+                  y2="65"
+                  stroke="#d97706"
+                  strokeWidth="1"
+                  opacity="0.55"
+                />
+                <line
+                  x1="23"
+                  y1="25"
+                  x2="23"
+                  y2="67"
+                  stroke="#d97706"
+                  strokeWidth="1"
+                  opacity="0.55"
+                />
+                <line
+                  x1="32"
+                  y1="25"
+                  x2="34"
+                  y2="65"
+                  stroke="#d97706"
+                  strokeWidth="1"
+                  opacity="0.55"
+                />
+                {/* horizontal bands */}
+                <line
+                  x1="7"
+                  y1="36"
+                  x2="39"
+                  y2="36"
+                  stroke="#d97706"
+                  strokeWidth="1"
+                  opacity="0.5"
+                />
+                <line
+                  x1="6"
+                  y1="47"
+                  x2="40"
+                  y2="47"
+                  stroke="#d97706"
+                  strokeWidth="1"
+                  opacity="0.5"
+                />
+                <line
+                  x1="7"
+                  y1="57"
+                  x2="39"
+                  y2="57"
+                  stroke="#d97706"
+                  strokeWidth="1"
+                  opacity="0.5"
+                />
+                {/* bottom band */}
+                <rect
+                  x="9"
+                  y="63"
+                  width="28"
+                  height="4"
+                  rx="1"
+                  fill="#d97706"
+                />
+                {/* base cone */}
+                <polygon points="13,67 23,73 33,67" fill="#b45309" />
+                {/* fringe dots */}
+                <circle cx="17" cy="73" r="2" fill="#92400e" />
+                <circle cx="23" cy="74" r="2" fill="#92400e" />
+                <circle cx="29" cy="73" r="2" fill="#92400e" />
+              </svg>
+            </motion.div>
+            {/* glow pulse behind lantern */}
+            <motion.div
+              animate={{ opacity: [0.2, 0.55, 0.2], scale: [0.8, 1.1, 0.8] }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: l.delay,
+              }}
+              style={{
+                position: "absolute",
+                top: `${l.strH + 20}px`,
+                width: "60px",
+                height: "60px",
+                background:
+                  "radial-gradient(circle, rgba(251,191,36,0.45) 0%, transparent 70%)",
+                borderRadius: "50%",
+                transform: "translateX(-50%)",
+                left: "50%",
+              }}
+            />
+          </motion.div>
+        ))}
+
+        {/* ── Stars between lanterns ── */}
+        {[
+          { left: "10.5%", top: 18, size: 13, delay: 0.2 },
+          { left: "22%", top: 28, size: 10, delay: 0.9 },
+          { left: "34%", top: 14, size: 14, delay: 0.4 },
+          { left: "45.5%", top: 22, size: 11, delay: 1.2 },
+          { left: "55.5%", top: 16, size: 13, delay: 0.7 },
+          { left: "67%", top: 25, size: 10, delay: 0.1 },
+          { left: "77.5%", top: 12, size: 14, delay: 1.5 },
+          { left: "88%", top: 20, size: 11, delay: 0.6 },
+        ].map((s, i) => (
+          <motion.div
+            key={`star-${i}`}
+            className="absolute"
+            style={{ left: s.left, top: `${s.top}px` }}
+            animate={{ opacity: [0.4, 1, 0.4], scale: [0.85, 1.25, 0.85] }}
+            transition={{
+              duration: 2.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: s.delay,
+            }}
+          >
+            <svg width={s.size} height={s.size} viewBox="0 0 24 24">
+              <polygon
+                points="12,1 14.9,8.2 22.5,9 17,14 18.8,21.5 12,17.8 5.2,21.5 7,14 1.5,9 9.1,8.2"
+                fill="#f59e0b"
+              />
+            </svg>
+          </motion.div>
+        ))}
+      </div>
+
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center space-y-6 py-12">

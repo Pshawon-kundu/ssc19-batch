@@ -97,10 +97,10 @@ export function Packages({ selectedPackage, onSelectPackage }: PackagesProps) {
 
           <div className="text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-              Choose Your Package
+              Choose Your Contribution
             </h2>
             <p className="text-gray-600">
-              Select the package that suits you best
+              Select the contribution that suits you best
             </p>
           </div>
 
@@ -190,7 +190,7 @@ export function Packages({ selectedPackage, onSelectPackage }: PackagesProps) {
                     : "bg-gray-100 text-gray-700 hover:bg-emerald-100 hover:text-emerald-700"
                 }`}
               >
-                {selectedPackage === pkg.id ? "Selected ✓" : "Select Package"}
+                {selectedPackage === pkg.id ? "Selected ✓" : "Select"}
               </button>
             </motion.div>
           ))}
