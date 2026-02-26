@@ -32,10 +32,10 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                <span className="text-emerald-800 font-bold text-lg">SSC</span>
+                <span className="text-emerald-800 font-bold text-sm">P'19</span>
               </div>
               <div>
-                <div className="font-bold text-xl">SSC 2019 Batch</div>
+                <div className="font-bold text-xl">Pilotian'19</div>
                 <div className="text-emerald-200 text-sm">Iftar Party</div>
               </div>
             </div>
@@ -116,7 +116,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-emerald-700 mt-8 pt-8 text-center text-emerald-200 text-sm">
-          <p>© 2026 SSC 2019 Batch. All rights reserved.</p>
+          <p>© 2026 Pilotian'19. All rights reserved.</p>
           <p className="mt-2">
             Developed by Provat &amp; Belal &amp; Mushfikur
           </p>

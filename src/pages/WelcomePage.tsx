@@ -320,7 +320,7 @@ export function WelcomePage() {
               margin: 0,
             }}
           >
-            SSC Batch · Class of 2019
+            Pilotian'19 · Class of 2019
           </p>
           <p
             style={{

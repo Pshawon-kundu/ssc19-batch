@@ -361,7 +361,7 @@ export function Hero({
                 <Sparkles className="text-amber-500" size={32} />
               </motion.div>
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-emerald-700 via-emerald-600 to-amber-600 bg-clip-text text-transparent drop-shadow-lg">
-                SSC 2019 Batch
+                Pilotian'19
               </h1>
               <motion.div
                 animate={{ rotate: -360 }}

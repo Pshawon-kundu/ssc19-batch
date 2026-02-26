@@ -38,7 +38,7 @@ export function Navigation() {
               <span className="text-white font-bold text-sm">P'19</span>
             </div>
             <div className="hidden sm:block">
-              <div className="font-bold text-gray-900">PILOTIAN'19</div>
+              <div className="font-bold text-gray-900">Pilotian'19</div>
               <div className="text-xs text-emerald-600">Iftar Party</div>
             </div>
           </a>
