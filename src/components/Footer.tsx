@@ -117,7 +117,9 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-emerald-700 mt-8 pt-8 text-center text-emerald-200 text-sm">
           <p>© 2026 SSC 2019 Batch. All rights reserved.</p>
-          <p className="mt-2">Developed by Provat &amp; Belal &amp; Mushfikur</p>
+          <p className="mt-2">
+            Developed by Provat &amp; Belal &amp; Mushfikur
+          </p>
         </div>
       </div>
     </footer>

@@ -5,6 +5,7 @@ import { Packages } from "../components/Packages";
 import { Album } from "../components/Album";
 import { RegistrationForm } from "../components/RegistrationForm";
 import { Footer } from "../components/Footer";
+import { ContactSection } from "../components/ContactSection";
 import { SuccessModal } from "../components/SuccessModal";
 import { ErrorModal } from "../components/ErrorModal";
 import { submitRegistration, fetchStats } from "../api";
@@ -136,6 +137,8 @@ export function EventPage() {
         onSubmit={handleRegistrationSubmit}
         isSubmitting={isSubmitting}
       />
+
+      <ContactSection />
 
       <Footer />
 
