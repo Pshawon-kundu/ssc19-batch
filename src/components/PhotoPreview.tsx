@@ -12,11 +12,11 @@ export function PhotoPreview({
 }: PhotoPreviewProps) {
   // Photos from uploaded images
   const samplePhotos = [
+    { id: 5, src: "5.jpeg", alt: "Event photo 5" },
     { id: 1, src: "1.jpeg", alt: "Event photo 1" },
     { id: 2, src: "2.jpeg", alt: "Event photo 2" },
     { id: 3, src: "3.jpeg", alt: "Event photo 3" },
     { id: 4, src: "4.jpeg", alt: "Event photo 4" },
-    { id: 5, src: "5.jpeg", alt: "Event photo 5" },
   ];
 
   return (
