@@ -7,13 +7,29 @@ import photo2 from "../assets/2.jpeg";
 import photo3 from "../assets/3.jpeg";
 import photo4 from "../assets/4.jpeg";
 import photo5 from "../assets/5.jpeg";
+import photo7 from "../assets/7.jpg";
+import photo8 from "../assets/8.jpg";
+import photo9 from "../assets/9.jpg";
+import photo10 from "../assets/10.jpg";
+import photo11 from "../assets/11.jpg";
+import photo12 from "../assets/12.jpg";
+import photo13 from "../assets/13.jpg";
+import photo14 from "../assets/14.jpg";
 
 const ALBUM_PHOTOS = [
-  { id: 1, src: photo1, alt: "Event photo 1" },
-  { id: 2, src: photo2, alt: "Event photo 2" },
-  { id: 3, src: photo3, alt: "Event photo 3" },
-  { id: 4, src: photo4, alt: "Event photo 4" },
-  { id: 5, src: photo5, alt: "Event photo 5" },
+  { id: 1,  src: photo1,  alt: "Event photo 1" },
+  { id: 2,  src: photo2,  alt: "Event photo 2" },
+  { id: 3,  src: photo3,  alt: "Event photo 3" },
+  { id: 4,  src: photo4,  alt: "Event photo 4" },
+  { id: 5,  src: photo5,  alt: "Event photo 5" },
+  { id: 7,  src: photo7,  alt: "Event photo 7" },
+  { id: 8,  src: photo8,  alt: "Event photo 8" },
+  { id: 9,  src: photo9,  alt: "Event photo 9" },
+  { id: 10, src: photo10, alt: "Event photo 10" },
+  { id: 11, src: photo11, alt: "Event photo 11" },
+  { id: 12, src: photo12, alt: "Event photo 12" },
+  { id: 13, src: photo13, alt: "Event photo 13" },
+  { id: 14, src: photo14, alt: "Event photo 14" },
 ];
 
 interface AlbumProps {

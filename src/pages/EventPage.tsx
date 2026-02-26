@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Navigation } from "../components/Navigation";
 import { Hero } from "../components/Hero";
 import { Packages } from "../components/Packages";
+import { Album } from "../components/Album";
 import { RegistrationForm } from "../components/RegistrationForm";
 import { Footer } from "../components/Footer";
 import { SuccessModal } from "../components/SuccessModal";
@@ -127,6 +128,8 @@ export function EventPage() {
           scrollToRegistration();
         }}
       />
+
+      <Album />
 
       <RegistrationForm
         selectedPackage={selectedPackage}
