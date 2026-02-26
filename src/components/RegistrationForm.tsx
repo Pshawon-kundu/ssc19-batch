@@ -285,19 +285,23 @@ export function RegistrationForm({
 
               {/* Step 1 form card */}
               <div className="lg:col-span-2 order-1 lg:order-2">
-                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sm:p-8 space-y-7">
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                   {/* Card header */}
-                  <div className="flex items-center gap-3 pb-5 border-b-2 border-gray-100">
-                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shrink-0 shadow">
+                  <div className="flex items-center gap-3 px-6 sm:px-8 py-5 bg-gradient-to-r from-emerald-600 to-emerald-700">
+                    <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
                       <User size={18} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-tight">
+                      <h3 className="text-base sm:text-lg font-bold text-white leading-tight">
                         Personal Details
                       </h3>
-                      <p className="text-xs text-gray-400 mt-0.5">Step 1 of 2 &mdash; Fill in your info below</p>
+                      <p className="text-xs text-emerald-100 mt-0.5">
+                        Step 1 of 2 &mdash; Fill in your info below
+                      </p>
                     </div>
                   </div>
+
+                  <div className="p-6 sm:p-8 space-y-6">
 
                   {/* Full Name */}
                   <div className="space-y-1.5">
@@ -334,14 +338,16 @@ export function RegistrationForm({
                     >
                       Phone Number <span className="text-red-500">*</span>
                     </label>
-                    <div className="relative">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 select-none pointer-events-none">🇧🇩</span>
+                    <div className="flex">
+                      <span className="inline-flex items-center px-3.5 border-2 border-r-0 rounded-l-xl text-xs font-bold text-gray-500 bg-gray-50 border-gray-200 select-none shrink-0">
+                        +880
+                      </span>
                       <input
                         type="tel"
                         id="phone"
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
-                        className={`w-full pl-11 pr-4 py-3.5 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
+                        className={`flex-1 px-4 py-3.5 border-2 rounded-r-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
                           errors.phone
                             ? "border-red-400 bg-red-50"
                             : "border-gray-200 hover:border-gray-300 bg-white"
@@ -368,12 +374,34 @@ export function RegistrationForm({
                       Select Contribution *
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {([
-                        { key: "iftar-only",           label: "Iftar Only",              icon: "🍽️",  desc: "Iftar dinner" },
-                        { key: "iftar-jersey",         label: "Iftar + Jersey",          icon: "👕",  desc: "Dinner + jersey" },
-                        { key: "iftar-jersey-seheri",  label: "Iftar + Jersey + Seheri", icon: "🌙",  desc: "Full package" },
-                        { key: "jersey-only",          label: "Jersey Only",             icon: "🏅",  desc: "Jersey alone" },
-                      ] as const).map(({ key, label, icon, desc }) => (
+                      {(
+                        [
+                          {
+                            key: "iftar-only",
+                            label: "Iftar Only",
+                            icon: "🍽️",
+                            desc: "Iftar dinner",
+                          },
+                          {
+                            key: "iftar-jersey",
+                            label: "Iftar + Jersey",
+                            icon: "👕",
+                            desc: "Dinner + jersey",
+                          },
+                          {
+                            key: "iftar-jersey-seheri",
+                            label: "Iftar + Jersey + Seheri",
+                            icon: "🌙",
+                            desc: "Full package",
+                          },
+                          {
+                            key: "jersey-only",
+                            label: "Jersey Only",
+                            icon: "🏅",
+                            desc: "Jersey alone",
+                          },
+                        ] as const
+                      ).map(({ key, label, icon, desc }) => (
                         <label
                           key={key}
                           className={`relative flex items-start gap-3 p-4 border-2 rounded-2xl cursor-pointer transition-all select-none ${
@@ -396,32 +424,56 @@ export function RegistrationForm({
                             className="sr-only"
                           />
                           {/* Custom radio dot */}
-                          <div className={`mt-0.5 w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
-                            formData.package === key
-                              ? "border-emerald-600 bg-emerald-600"
-                              : "border-gray-300 bg-white"
-                          }`}>
+                          <div
+                            className={`mt-0.5 w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
+                              formData.package === key
+                                ? "border-emerald-600 bg-emerald-600"
+                                : "border-gray-300 bg-white"
+                            }`}
+                          >
                             {formData.package === key && (
                               <div className="w-1.5 h-1.5 rounded-full bg-white" />
                             )}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-1.5 mb-0.5">
-                              <span className="text-base leading-none">{icon}</span>
-                              <span className={`font-bold text-sm leading-tight ${
-                                formData.package === key ? "text-emerald-800" : "text-gray-800"
-                              }`}>{label}</span>
+                              <span className="text-base leading-none">
+                                {icon}
+                              </span>
+                              <span
+                                className={`font-bold text-sm leading-tight ${
+                                  formData.package === key
+                                    ? "text-emerald-800"
+                                    : "text-gray-800"
+                                }`}
+                              >
+                                {label}
+                              </span>
                             </div>
-                            <div className="text-xs text-gray-400 mb-1.5">{desc}</div>
-                            <div className={`text-base font-extrabold ${
-                              formData.package === key ? "text-emerald-600" : "text-emerald-500"
-                            }`}>
+                            <div className="text-xs text-gray-400 mb-1.5">
+                              {desc}
+                            </div>
+                            <div
+                              className={`text-base font-extrabold ${
+                                formData.package === key
+                                  ? "text-emerald-600"
+                                  : "text-emerald-500"
+                              }`}
+                            >
                               ৳{packagePrices[key]}
                             </div>
                           </div>
                           {formData.package === key && (
                             <div className="absolute top-2.5 right-2.5 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center">
-                              <svg viewBox="0 0 12 12" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2.5 h-2.5">
+                              <svg
+                                viewBox="0 0 12 12"
+                                fill="none"
+                                stroke="white"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="w-2.5 h-2.5"
+                              >
                                 <polyline points="2,6 5,9 10,3" />
                               </svg>
                             </div>
@@ -559,10 +611,11 @@ export function RegistrationForm({
                   <button
                     type="button"
                     onClick={handleNextStep}
-                    className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2.5 mt-2"
+                    className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:from-emerald-700 hover:to-emerald-800 active:scale-[0.99] transition-all flex items-center justify-center gap-2.5"
                   >
                     Next: Payment Details <ArrowRight size={19} />
                   </button>
+                  </div>
                 </div>
               </div>
             </motion.div>
