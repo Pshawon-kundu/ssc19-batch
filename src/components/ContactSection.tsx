@@ -52,14 +52,14 @@ export function ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-6 items-start">
-          {/* Contact Info Cards */}
+        <div className="max-w-2xl mx-auto space-y-6">
+          {/* Contact Info Cards — side by side */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: 0.1 }}
-            className="lg:col-span-2 space-y-4"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {/* General Queries */}
             <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl p-5 shadow-lg">
@@ -82,7 +82,7 @@ export function ContactSection() {
               >
                 <div className="flex items-center gap-2.5">
                   <Phone size={15} className="text-emerald-300 shrink-0" />
-                  <span className="font-extrabold text-white text-lg tracking-wide">
+                  <span className="font-extrabold text-white text-base tracking-wide">
                     01786-571200
                   </span>
                 </div>
@@ -113,7 +113,7 @@ export function ContactSection() {
               >
                 <div className="flex items-center gap-2.5">
                   <Phone size={15} className="text-amber-200 shrink-0" />
-                  <span className="font-extrabold text-white text-lg tracking-wide">
+                  <span className="font-extrabold text-white text-base tracking-wide">
                     01717529860
                   </span>
                 </div>
@@ -124,13 +124,12 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Comment Form */}
+          {/* Comment Form — full width, centered */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: 0.2 }}
-            className="lg:col-span-3"
           >
             <div className="bg-white rounded-2xl border-2 border-gray-100 shadow-sm overflow-hidden">
               {/* Form header */}
