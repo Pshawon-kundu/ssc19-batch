@@ -66,12 +66,13 @@ export function SuccessModal({
 
               {/* Success Message */}
               <div className="text-center space-y-4">
-                <div className="space-y-1">
+                <div className="space-y-2">
                   <h2 className="text-2xl font-bold text-gray-900">
-                    Registration Done! 🎉
+                    Thank You!
                   </h2>
-                  <p className="text-sm text-gray-500">
-                    Your spot is confirmed.
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Thank you for registering. Our team verify your payment and
+                    notify you soon.
                   </p>
                 </div>
 

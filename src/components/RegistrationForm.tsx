@@ -107,9 +107,9 @@ export function RegistrationForm({
       newErrors.transactionId = "Transaction ID is required";
     }
     if (!formData.lastTwoDigit?.trim()) {
-      newErrors.lastTwoDigit = "Last 2 digits are required";
-    } else if (!/^\d{2}$/.test(formData.lastTwoDigit)) {
-      newErrors.lastTwoDigit = "Must be exactly 2 digits";
+      newErrors.lastTwoDigit = "Last 3 digits are required";
+    } else if (!/^\d{3}$/.test(formData.lastTwoDigit)) {
+      newErrors.lastTwoDigit = "Must be exactly 3 digits";
     }
 
     setErrors(newErrors);
@@ -732,7 +732,9 @@ export function RegistrationForm({
                         Processing...
                       </>
                     ) : (
-                      <>🎉 Complete Registration</>
+                      <>
+                        <CheckCircle2 size={20} /> Complete Registration
+                      </>
                     )}
                   </button>
                 </div>
