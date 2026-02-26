@@ -28,7 +28,7 @@ export function BotChat() {
       setTimeout(() => {
         setIsTyping(false);
         setShownCount(1);
-      }, 4000)
+      }, 4000),
     );
 
     // Message 2: typing at 5.5 s → arrives at 6.5 s
@@ -37,7 +37,7 @@ export function BotChat() {
       setTimeout(() => {
         setIsTyping(false);
         setShownCount(2);
-      }, 6500)
+      }, 6500),
     );
 
     // Message 3: typing at 8 s → arrives at 9 s
@@ -46,7 +46,7 @@ export function BotChat() {
       setTimeout(() => {
         setIsTyping(false);
         setShownCount(3);
-      }, 9000)
+      }, 9000),
     );
 
     return () => timers.forEach(clearTimeout);

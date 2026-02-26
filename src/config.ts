@@ -6,9 +6,9 @@
 // Format: 11-digit Bangladeshi mobile number (01XXXXXXXXX)
 
 export const PAYMENT_NUMBERS = {
-  bkash: "01717529860",
-  nagad: "01717529860",
-  rocket: "01717529860",
+  bkash: "01753825949",
+  nagad: "01688194646",
+  rocket: "01753825949",
 };
 
 // ============================================
