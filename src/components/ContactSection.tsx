@@ -10,9 +10,7 @@ export function ContactSection() {
     e.preventDefault();
     if (!form.name.trim() || !form.message.trim()) return;
     // Build WhatsApp / SMS-style message link to the contact number
-    const text = encodeURIComponent(
-      `Name: ${form.name}\n\n${form.message}`,
-    );
+    const text = encodeURIComponent(`Name: ${form.name}\n\n${form.message}`);
     window.open(`https://wa.me/8801786571200?text=${text}`, "_blank");
     setSubmitted(true);
     setTimeout(() => {

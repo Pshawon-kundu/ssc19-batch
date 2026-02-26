@@ -285,34 +285,34 @@ export function RegistrationForm({
 
               {/* Step 1 form card */}
               <div className="lg:col-span-2 order-1 lg:order-2">
-                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sm:p-8 space-y-6">
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sm:p-8 space-y-7">
                   {/* Card header */}
-                  <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
-                    <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0">
-                      <User size={17} className="text-emerald-700" />
+                  <div className="flex items-center gap-3 pb-5 border-b-2 border-gray-100">
+                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shrink-0 shadow">
+                      <User size={18} className="text-white" />
                     </div>
                     <div>
                       <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-tight">
                         Personal Details
                       </h3>
-                      <p className="text-xs text-gray-400">Step 1 of 2</p>
+                      <p className="text-xs text-gray-400 mt-0.5">Step 1 of 2 &mdash; Fill in your info below</p>
                     </div>
                   </div>
 
                   {/* Full Name */}
-                  <div>
+                  <div className="space-y-1.5">
                     <label
                       htmlFor="name"
-                      className="block text-sm font-semibold text-gray-700 mb-1.5"
+                      className="block text-sm font-semibold text-gray-700"
                     >
-                      Full Name *
+                      Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       id="name"
                       value={formData.name}
                       onChange={(e) => handleChange("name", e.target.value)}
-                      className={`w-full px-4 py-3 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all ${
+                      className={`w-full px-4 py-3.5 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
                         errors.name
                           ? "border-red-400 bg-red-50"
                           : "border-gray-200 hover:border-gray-300 bg-white"
@@ -320,40 +320,43 @@ export function RegistrationForm({
                       placeholder="Enter your full name"
                     />
                     {errors.name && (
-                      <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                      <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
                         ⚠ {errors.name}
                       </p>
                     )}
                   </div>
 
                   {/* Phone Number */}
-                  <div>
+                  <div className="space-y-1.5">
                     <label
                       htmlFor="phone"
-                      className="block text-sm font-semibold text-gray-700 mb-1.5"
+                      className="block text-sm font-semibold text-gray-700"
                     >
-                      Phone Number *
+                      Phone Number <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      value={formData.phone}
-                      onChange={(e) => handleChange("phone", e.target.value)}
-                      className={`w-full px-4 py-3 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all ${
-                        errors.phone
-                          ? "border-red-400 bg-red-50"
-                          : "border-gray-200 hover:border-gray-300 bg-white"
-                      }`}
-                      placeholder="01XXXXXXXXX"
-                      maxLength={11}
-                    />
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 select-none pointer-events-none">🇧🇩</span>
+                      <input
+                        type="tel"
+                        id="phone"
+                        value={formData.phone}
+                        onChange={(e) => handleChange("phone", e.target.value)}
+                        className={`w-full pl-11 pr-4 py-3.5 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
+                          errors.phone
+                            ? "border-red-400 bg-red-50"
+                            : "border-gray-200 hover:border-gray-300 bg-white"
+                        }`}
+                        placeholder="01XXXXXXXXX"
+                        maxLength={11}
+                      />
+                    </div>
                     {errors.phone && (
-                      <p className="text-red-500 text-xs mt-1.5">
+                      <p className="text-red-500 text-xs mt-1">
                         ⚠ {errors.phone}
                       </p>
                     )}
                     {errors.submit && (
-                      <p className="text-red-500 text-xs mt-1.5">
+                      <p className="text-red-500 text-xs mt-1">
                         ⚠ {errors.submit}
                       </p>
                     )}
@@ -364,14 +367,19 @@ export function RegistrationForm({
                     <label className="block text-sm font-semibold text-gray-700 mb-3">
                       Select Contribution *
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {Object.entries(packagePrices).map(([key, price]) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {([
+                        { key: "iftar-only",           label: "Iftar Only",              icon: "🍽️",  desc: "Iftar dinner" },
+                        { key: "iftar-jersey",         label: "Iftar + Jersey",          icon: "👕",  desc: "Dinner + jersey" },
+                        { key: "iftar-jersey-seheri",  label: "Iftar + Jersey + Seheri", icon: "🌙",  desc: "Full package" },
+                        { key: "jersey-only",          label: "Jersey Only",             icon: "🏅",  desc: "Jersey alone" },
+                      ] as const).map(({ key, label, icon, desc }) => (
                         <label
                           key={key}
-                          className={`flex items-center gap-3 p-3.5 border-2 rounded-xl cursor-pointer transition-all ${
+                          className={`relative flex items-start gap-3 p-4 border-2 rounded-2xl cursor-pointer transition-all select-none ${
                             formData.package === key
-                              ? "border-emerald-500 bg-emerald-50 shadow-sm"
-                              : "border-gray-200 hover:border-emerald-300 hover:bg-gray-50"
+                              ? "border-emerald-500 bg-emerald-50 shadow-md ring-2 ring-emerald-100"
+                              : "border-gray-200 bg-white hover:border-emerald-300 hover:bg-gray-50 hover:shadow-sm"
                           }`}
                         >
                           <input
@@ -385,16 +393,39 @@ export function RegistrationForm({
                                 e.target.value as PackageType,
                               )
                             }
-                            className="w-4 h-4 text-emerald-600 shrink-0"
+                            className="sr-only"
                           />
+                          {/* Custom radio dot */}
+                          <div className={`mt-0.5 w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
+                            formData.package === key
+                              ? "border-emerald-600 bg-emerald-600"
+                              : "border-gray-300 bg-white"
+                          }`}>
+                            {formData.package === key && (
+                              <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                            )}
+                          </div>
                           <div className="flex-1 min-w-0">
-                            <div className="font-semibold text-gray-800 text-sm capitalize leading-tight">
-                              {key.replace(/-/g, " ")}
+                            <div className="flex items-center gap-1.5 mb-0.5">
+                              <span className="text-base leading-none">{icon}</span>
+                              <span className={`font-bold text-sm leading-tight ${
+                                formData.package === key ? "text-emerald-800" : "text-gray-800"
+                              }`}>{label}</span>
                             </div>
-                            <div className="text-emerald-600 font-bold text-sm">
-                              ৳{price}
+                            <div className="text-xs text-gray-400 mb-1.5">{desc}</div>
+                            <div className={`text-base font-extrabold ${
+                              formData.package === key ? "text-emerald-600" : "text-emerald-500"
+                            }`}>
+                              ৳{packagePrices[key]}
                             </div>
                           </div>
+                          {formData.package === key && (
+                            <div className="absolute top-2.5 right-2.5 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center">
+                              <svg viewBox="0 0 12 12" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2.5 h-2.5">
+                                <polyline points="2,6 5,9 10,3" />
+                              </svg>
+                            </div>
+                          )}
                         </label>
                       ))}
                     </div>
@@ -528,7 +559,7 @@ export function RegistrationForm({
                   <button
                     type="button"
                     onClick={handleNextStep}
-                    className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-xl font-semibold text-base shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2.5 mt-2"
                   >
                     Next: Payment Details <ArrowRight size={19} />
                   </button>
