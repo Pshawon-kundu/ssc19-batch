@@ -302,319 +302,320 @@ export function RegistrationForm({
                   </div>
 
                   <div className="p-6 sm:p-8 space-y-6">
-
-                  {/* Full Name */}
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-semibold text-gray-700"
-                    >
-                      Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => handleChange("name", e.target.value)}
-                      className={`w-full px-4 py-3.5 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
-                        errors.name
-                          ? "border-red-400 bg-red-50"
-                          : "border-gray-200 hover:border-gray-300 bg-white"
-                      }`}
-                      placeholder="Enter your full name"
-                    />
-                    {errors.name && (
-                      <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
-                        ⚠ {errors.name}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Phone Number */}
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-semibold text-gray-700"
-                    >
-                      Phone Number <span className="text-red-500">*</span>
-                    </label>
-                    <div className="flex">
-                      <span className="inline-flex items-center px-3.5 border-2 border-r-0 rounded-l-xl text-xs font-bold text-gray-500 bg-gray-50 border-gray-200 select-none shrink-0">
-                        +880
-                      </span>
+                    {/* Full Name */}
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-semibold text-gray-700"
+                      >
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
                       <input
-                        type="tel"
-                        id="phone"
-                        value={formData.phone}
-                        onChange={(e) => handleChange("phone", e.target.value)}
-                        className={`flex-1 px-4 py-3.5 border-2 rounded-r-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
-                          errors.phone
+                        type="text"
+                        id="name"
+                        value={formData.name}
+                        onChange={(e) => handleChange("name", e.target.value)}
+                        className={`w-full px-4 py-3.5 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
+                          errors.name
                             ? "border-red-400 bg-red-50"
                             : "border-gray-200 hover:border-gray-300 bg-white"
                         }`}
-                        placeholder="01XXXXXXXXX"
-                        maxLength={11}
+                        placeholder="Enter your full name"
                       />
+                      {errors.name && (
+                        <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
+                          ⚠ {errors.name}
+                        </p>
+                      )}
                     </div>
-                    {errors.phone && (
-                      <p className="text-red-500 text-xs mt-1">
-                        ⚠ {errors.phone}
-                      </p>
-                    )}
-                    {errors.submit && (
-                      <p className="text-red-500 text-xs mt-1">
-                        ⚠ {errors.submit}
-                      </p>
-                    )}
-                  </div>
 
-                  {/* Contribution Selection */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Select Contribution *
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {(
-                        [
-                          {
-                            key: "iftar-only",
-                            label: "Iftar Only",
-                            icon: "🍽️",
-                            desc: "Iftar dinner",
-                          },
-                          {
-                            key: "iftar-jersey",
-                            label: "Iftar + Jersey",
-                            icon: "👕",
-                            desc: "Dinner + jersey",
-                          },
-                          {
-                            key: "iftar-jersey-seheri",
-                            label: "Iftar + Jersey + Seheri",
-                            icon: "🌙",
-                            desc: "Full package",
-                          },
-                          {
-                            key: "jersey-only",
-                            label: "Jersey Only",
-                            icon: "🏅",
-                            desc: "Jersey alone",
-                          },
-                        ] as const
-                      ).map(({ key, label, icon, desc }) => (
-                        <label
-                          key={key}
-                          className={`relative flex items-start gap-3 p-4 border-2 rounded-2xl cursor-pointer transition-all select-none ${
-                            formData.package === key
-                              ? "border-emerald-500 bg-emerald-50 shadow-md ring-2 ring-emerald-100"
-                              : "border-gray-200 bg-white hover:border-emerald-300 hover:bg-gray-50 hover:shadow-sm"
+                    {/* Phone Number */}
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-semibold text-gray-700"
+                      >
+                        Phone Number <span className="text-red-500">*</span>
+                      </label>
+                      <div className="flex">
+                        <span className="inline-flex items-center px-3.5 border-2 border-r-0 rounded-l-xl text-xs font-bold text-gray-500 bg-gray-50 border-gray-200 select-none shrink-0">
+                          +880
+                        </span>
+                        <input
+                          type="tel"
+                          id="phone"
+                          value={formData.phone}
+                          onChange={(e) =>
+                            handleChange("phone", e.target.value)
+                          }
+                          className={`flex-1 px-4 py-3.5 border-2 rounded-r-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
+                            errors.phone
+                              ? "border-red-400 bg-red-50"
+                              : "border-gray-200 hover:border-gray-300 bg-white"
                           }`}
-                        >
-                          <input
-                            type="radio"
-                            name="package"
-                            value={key}
-                            checked={formData.package === key}
-                            onChange={(e) =>
-                              handleChange(
-                                "package",
-                                e.target.value as PackageType,
-                              )
-                            }
-                            className="sr-only"
-                          />
-                          {/* Custom radio dot */}
-                          <div
-                            className={`mt-0.5 w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
+                          placeholder="01XXXXXXXXX"
+                          maxLength={11}
+                        />
+                      </div>
+                      {errors.phone && (
+                        <p className="text-red-500 text-xs mt-1">
+                          ⚠ {errors.phone}
+                        </p>
+                      )}
+                      {errors.submit && (
+                        <p className="text-red-500 text-xs mt-1">
+                          ⚠ {errors.submit}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Contribution Selection */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-3">
+                        Select Contribution *
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {(
+                          [
+                            {
+                              key: "iftar-only",
+                              label: "Iftar Only",
+                              icon: "🍽️",
+                              desc: "Iftar dinner",
+                            },
+                            {
+                              key: "iftar-jersey",
+                              label: "Iftar + Jersey",
+                              icon: "👕",
+                              desc: "Dinner + jersey",
+                            },
+                            {
+                              key: "iftar-jersey-seheri",
+                              label: "Iftar + Jersey + Seheri",
+                              icon: "🌙",
+                              desc: "Full package",
+                            },
+                            {
+                              key: "jersey-only",
+                              label: "Jersey Only",
+                              icon: "🏅",
+                              desc: "Jersey alone",
+                            },
+                          ] as const
+                        ).map(({ key, label, icon, desc }) => (
+                          <label
+                            key={key}
+                            className={`relative flex items-start gap-3 p-4 border-2 rounded-2xl cursor-pointer transition-all select-none ${
                               formData.package === key
-                                ? "border-emerald-600 bg-emerald-600"
-                                : "border-gray-300 bg-white"
+                                ? "border-emerald-500 bg-emerald-50 shadow-md ring-2 ring-emerald-100"
+                                : "border-gray-200 bg-white hover:border-emerald-300 hover:bg-gray-50 hover:shadow-sm"
                             }`}
                           >
-                            {formData.package === key && (
-                              <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                            )}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-1.5 mb-0.5">
-                              <span className="text-base leading-none">
-                                {icon}
-                              </span>
-                              <span
-                                className={`font-bold text-sm leading-tight ${
+                            <input
+                              type="radio"
+                              name="package"
+                              value={key}
+                              checked={formData.package === key}
+                              onChange={(e) =>
+                                handleChange(
+                                  "package",
+                                  e.target.value as PackageType,
+                                )
+                              }
+                              className="sr-only"
+                            />
+                            {/* Custom radio dot */}
+                            <div
+                              className={`mt-0.5 w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
+                                formData.package === key
+                                  ? "border-emerald-600 bg-emerald-600"
+                                  : "border-gray-300 bg-white"
+                              }`}
+                            >
+                              {formData.package === key && (
+                                <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-1.5 mb-0.5">
+                                <span className="text-base leading-none">
+                                  {icon}
+                                </span>
+                                <span
+                                  className={`font-bold text-sm leading-tight ${
+                                    formData.package === key
+                                      ? "text-emerald-800"
+                                      : "text-gray-800"
+                                  }`}
+                                >
+                                  {label}
+                                </span>
+                              </div>
+                              <div className="text-xs text-gray-400 mb-1.5">
+                                {desc}
+                              </div>
+                              <div
+                                className={`text-base font-extrabold ${
                                   formData.package === key
-                                    ? "text-emerald-800"
-                                    : "text-gray-800"
+                                    ? "text-emerald-600"
+                                    : "text-emerald-500"
                                 }`}
                               >
-                                {label}
+                                ৳{packagePrices[key]}
+                              </div>
+                            </div>
+                            {formData.package === key && (
+                              <div className="absolute top-2.5 right-2.5 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center">
+                                <svg
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                  stroke="white"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="w-2.5 h-2.5"
+                                >
+                                  <polyline points="2,6 5,9 10,3" />
+                                </svg>
+                              </div>
+                            )}
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Jersey Size (Conditional) */}
+                    {needsJerseySize && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="space-y-5 border-t-2 border-dashed border-emerald-200 pt-5"
+                      >
+                        <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                          <span>👕</span> Jersey Information
+                        </h3>
+
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2.5">
+                            Jersey Size *
+                          </label>
+                          <div className="flex flex-wrap gap-2">
+                            {["S", "M", "L", "XL", "XXL"].map((size) => (
+                              <button
+                                key={size}
+                                type="button"
+                                onClick={() => handleChange("jerseySize", size)}
+                                className={`px-5 py-2.5 border-2 rounded-xl text-sm font-bold transition-all ${
+                                  formData.jerseySize === size
+                                    ? "border-emerald-600 bg-emerald-600 text-white shadow-md"
+                                    : "border-gray-200 text-gray-600 hover:border-emerald-400"
+                                }`}
+                              >
+                                {size}
+                              </button>
+                            ))}
+                          </div>
+                          {errors.jerseySize && (
+                            <p className="text-red-500 text-xs mt-1.5">
+                              ⚠ {errors.jerseySize}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div>
+                            <label
+                              htmlFor="jerseyName"
+                              className="block text-sm font-semibold text-gray-700 mb-1.5"
+                            >
+                              Jersey Name *
+                            </label>
+                            <input
+                              type="text"
+                              id="jerseyName"
+                              value={formData.jerseyName}
+                              onChange={(e) =>
+                                handleChange(
+                                  "jerseyName",
+                                  e.target.value.toUpperCase(),
+                                )
+                              }
+                              maxLength={15}
+                              className={`w-full px-4 py-3 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 uppercase transition-all ${
+                                errors.jerseyName
+                                  ? "border-red-400 bg-red-50"
+                                  : "border-gray-200 hover:border-gray-300"
+                              }`}
+                              placeholder="KALU"
+                            />
+                            <div className="flex justify-between mt-1">
+                              {errors.jerseyName ? (
+                                <p className="text-red-500 text-xs">
+                                  ⚠ {errors.jerseyName}
+                                </p>
+                              ) : (
+                                <p className="text-gray-400 text-xs">
+                                  Max 15 chars
+                                </p>
+                              )}
+                              <span
+                                className={`text-xs font-semibold ${
+                                  (formData.jerseyName?.length || 0) > 15
+                                    ? "text-red-500"
+                                    : "text-gray-400"
+                                }`}
+                              >
+                                {formData.jerseyName?.length || 0}/15
                               </span>
                             </div>
-                            <div className="text-xs text-gray-400 mb-1.5">
-                              {desc}
-                            </div>
-                            <div
-                              className={`text-base font-extrabold ${
-                                formData.package === key
-                                  ? "text-emerald-600"
-                                  : "text-emerald-500"
-                              }`}
-                            >
-                              ৳{packagePrices[key]}
-                            </div>
                           </div>
-                          {formData.package === key && (
-                            <div className="absolute top-2.5 right-2.5 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center">
-                              <svg
-                                viewBox="0 0 12 12"
-                                fill="none"
-                                stroke="white"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="w-2.5 h-2.5"
-                              >
-                                <polyline points="2,6 5,9 10,3" />
-                              </svg>
-                            </div>
-                          )}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
 
-                  {/* Jersey Size (Conditional) */}
-                  {needsJerseySize && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="space-y-5 border-t-2 border-dashed border-emerald-200 pt-5"
-                    >
-                      <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
-                        <span>👕</span> Jersey Information
-                      </h3>
-
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2.5">
-                          Jersey Size *
-                        </label>
-                        <div className="flex flex-wrap gap-2">
-                          {["S", "M", "L", "XL", "XXL"].map((size) => (
-                            <button
-                              key={size}
-                              type="button"
-                              onClick={() => handleChange("jerseySize", size)}
-                              className={`px-5 py-2.5 border-2 rounded-xl text-sm font-bold transition-all ${
-                                formData.jerseySize === size
-                                  ? "border-emerald-600 bg-emerald-600 text-white shadow-md"
-                                  : "border-gray-200 text-gray-600 hover:border-emerald-400"
-                              }`}
+                          <div>
+                            <label
+                              htmlFor="jerseyNumber"
+                              className="block text-sm font-semibold text-gray-700 mb-1.5"
                             >
-                              {size}
-                            </button>
-                          ))}
-                        </div>
-                        {errors.jerseySize && (
-                          <p className="text-red-500 text-xs mt-1.5">
-                            ⚠ {errors.jerseySize}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                          <label
-                            htmlFor="jerseyName"
-                            className="block text-sm font-semibold text-gray-700 mb-1.5"
-                          >
-                            Jersey Name *
-                          </label>
-                          <input
-                            type="text"
-                            id="jerseyName"
-                            value={formData.jerseyName}
-                            onChange={(e) =>
-                              handleChange(
-                                "jerseyName",
-                                e.target.value.toUpperCase(),
-                              )
-                            }
-                            maxLength={15}
-                            className={`w-full px-4 py-3 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 uppercase transition-all ${
-                              errors.jerseyName
-                                ? "border-red-400 bg-red-50"
-                                : "border-gray-200 hover:border-gray-300"
-                            }`}
-                            placeholder="KALU"
-                          />
-                          <div className="flex justify-between mt-1">
-                            {errors.jerseyName ? (
-                              <p className="text-red-500 text-xs">
-                                ⚠ {errors.jerseyName}
+                              Jersey Number *
+                            </label>
+                            <input
+                              type="number"
+                              id="jerseyNumber"
+                              value={formData.jerseyNumber}
+                              onChange={(e) =>
+                                handleChange("jerseyNumber", e.target.value)
+                              }
+                              min="0"
+                              max="99"
+                              className={`w-full px-4 py-3 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all ${
+                                errors.jerseyNumber
+                                  ? "border-red-400 bg-red-50"
+                                  : "border-gray-200 hover:border-gray-300"
+                              }`}
+                              placeholder="10"
+                            />
+                            {errors.jerseyNumber ? (
+                              <p className="text-red-500 text-xs mt-1">
+                                ⚠ {errors.jerseyNumber}
                               </p>
                             ) : (
-                              <p className="text-gray-400 text-xs">
-                                Max 15 chars
+                              <p className="text-gray-400 text-xs mt-1">
+                                0 – 99 only
                               </p>
                             )}
-                            <span
-                              className={`text-xs font-semibold ${
-                                (formData.jerseyName?.length || 0) > 15
-                                  ? "text-red-500"
-                                  : "text-gray-400"
-                              }`}
-                            >
-                              {formData.jerseyName?.length || 0}/15
-                            </span>
                           </div>
                         </div>
+                      </motion.div>
+                    )}
 
-                        <div>
-                          <label
-                            htmlFor="jerseyNumber"
-                            className="block text-sm font-semibold text-gray-700 mb-1.5"
-                          >
-                            Jersey Number *
-                          </label>
-                          <input
-                            type="number"
-                            id="jerseyNumber"
-                            value={formData.jerseyNumber}
-                            onChange={(e) =>
-                              handleChange("jerseyNumber", e.target.value)
-                            }
-                            min="0"
-                            max="99"
-                            className={`w-full px-4 py-3 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all ${
-                              errors.jerseyNumber
-                                ? "border-red-400 bg-red-50"
-                                : "border-gray-200 hover:border-gray-300"
-                            }`}
-                            placeholder="10"
-                          />
-                          {errors.jerseyNumber ? (
-                            <p className="text-red-500 text-xs mt-1">
-                              ⚠ {errors.jerseyNumber}
-                            </p>
-                          ) : (
-                            <p className="text-gray-400 text-xs mt-1">
-                              0 – 99 only
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Next Button */}
-                  <button
-                    type="button"
-                    onClick={handleNextStep}
-                    className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:from-emerald-700 hover:to-emerald-800 active:scale-[0.99] transition-all flex items-center justify-center gap-2.5"
-                  >
-                    Next: Payment Details <ArrowRight size={19} />
-                  </button>
+                    {/* Next Button */}
+                    <button
+                      type="button"
+                      onClick={handleNextStep}
+                      className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:from-emerald-700 hover:to-emerald-800 active:scale-[0.99] transition-all flex items-center justify-center gap-2.5"
+                    >
+                      Next: Payment Details <ArrowRight size={19} />
+                    </button>
                   </div>
                 </div>
               </div>

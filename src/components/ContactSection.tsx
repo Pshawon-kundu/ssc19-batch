@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { MessageCircle, Phone, Send, CheckCircle2, Headphones } from "lucide-react";
+import {
+  MessageCircle,
+  Phone,
+  Send,
+  CheckCircle2,
+  Headphones,
+} from "lucide-react";
 
 export function ContactSection() {
   const [form, setForm] = useState({ name: "", message: "" });
@@ -41,7 +47,8 @@ export function ContactSection() {
             Have a Question?
           </h2>
           <p className="text-gray-400 text-sm sm:text-base max-w-md mx-auto">
-            Feel free to send us your queries — we'll get back to you as soon as possible.
+            Feel free to send us your queries — we'll get back to you as soon as
+            possible.
           </p>
         </motion.div>
 
@@ -55,54 +62,62 @@ export function ContactSection() {
             className="lg:col-span-2 space-y-4"
           >
             {/* General Queries */}
-            <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-5 shadow-lg text-white">
+            <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl p-5 shadow-lg">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shrink-0">
                   <MessageCircle size={18} className="text-white" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-200">General Queries</p>
-                  <p className="text-sm font-semibold text-white mt-0.5">Comments or questions?</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-200">
+                    General Queries
+                  </p>
+                  <p className="text-sm font-semibold text-white mt-0.5">
+                    Comments or questions?
+                  </p>
                 </div>
               </div>
               <a
                 href="tel:01786571200"
-                className="flex items-center justify-between bg-white/15 hover:bg-white/25 active:bg-white/30 transition-colors rounded-xl px-4 py-3.5 group"
+                className="flex items-center justify-between bg-emerald-900 hover:bg-emerald-950 transition-colors rounded-xl px-4 py-3.5"
               >
                 <div className="flex items-center gap-2.5">
-                  <Phone size={15} className="text-emerald-200 shrink-0" />
+                  <Phone size={15} className="text-emerald-300 shrink-0" />
                   <span className="font-extrabold text-white text-lg tracking-wide">
                     01786-571200
                   </span>
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-200 group-hover:text-white transition-colors">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-300 border border-emerald-500 px-2.5 py-1 rounded-lg">
                   Tap to Call
                 </span>
               </a>
             </div>
 
             {/* Technical Support */}
-            <div className="bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl p-5 shadow-lg text-white">
+            <div className="bg-gradient-to-br from-amber-600 to-orange-700 rounded-2xl p-5 shadow-lg">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center shrink-0">
                   <Headphones size={18} className="text-white" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-amber-100">Technical Issues</p>
-                  <p className="text-sm font-semibold text-white mt-0.5">Website / payment problems?</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-amber-200">
+                    Technical Issues
+                  </p>
+                  <p className="text-sm font-semibold text-white mt-0.5">
+                    Website / payment problems?
+                  </p>
                 </div>
               </div>
               <a
                 href="tel:01717529860"
-                className="flex items-center justify-between bg-white/15 hover:bg-white/25 active:bg-white/30 transition-colors rounded-xl px-4 py-3.5 group"
+                className="flex items-center justify-between bg-orange-900 hover:bg-orange-950 transition-colors rounded-xl px-4 py-3.5"
               >
                 <div className="flex items-center gap-2.5">
-                  <Phone size={15} className="text-amber-100 shrink-0" />
+                  <Phone size={15} className="text-amber-300 shrink-0" />
                   <span className="font-extrabold text-white text-lg tracking-wide">
                     01717529860
                   </span>
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-100 group-hover:text-white transition-colors">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 border border-amber-500 px-2.5 py-1 rounded-lg">
                   Tap to Call
                 </span>
               </a>
@@ -124,8 +139,12 @@ export function ContactSection() {
                   <Send size={14} className="text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-gray-800">Send a Message</p>
-                  <p className="text-[11px] text-gray-400">Opens WhatsApp — no login needed</p>
+                  <p className="text-sm font-bold text-gray-800">
+                    Send a Message
+                  </p>
+                  <p className="text-[11px] text-gray-400">
+                    Opens WhatsApp — no login needed
+                  </p>
                 </div>
               </div>
 
@@ -138,10 +157,15 @@ export function ContactSection() {
                   <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-1">
                     <CheckCircle2 size={34} className="text-emerald-500" />
                   </div>
-                  <p className="font-bold text-gray-800 text-xl">Message Sent!</p>
+                  <p className="font-bold text-gray-800 text-xl">
+                    Message Sent!
+                  </p>
                   <p className="text-gray-400 text-sm max-w-xs">
                     WhatsApp is opening with your message pre-filled to{" "}
-                    <span className="font-semibold text-gray-600">01786-571200</span>.
+                    <span className="font-semibold text-gray-600">
+                      01786-571200
+                    </span>
+                    .
                   </p>
                 </motion.div>
               ) : (
