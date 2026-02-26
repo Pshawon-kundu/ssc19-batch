@@ -93,13 +93,13 @@ export function ContactSection() {
             </div>
 
             {/* Technical Support */}
-            <div className="bg-gradient-to-br from-amber-600 to-orange-700 rounded-2xl p-5 shadow-lg">
+            <div className="bg-gradient-to-br from-amber-600 to-amber-700 rounded-2xl p-5 shadow-lg">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center shrink-0">
                   <Headphones size={18} className="text-white" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-amber-200">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-amber-100">
                     Technical Issues
                   </p>
                   <p className="text-sm font-semibold text-white mt-0.5">
@@ -109,15 +109,15 @@ export function ContactSection() {
               </div>
               <a
                 href="tel:01717529860"
-                className="flex items-center justify-between bg-orange-900 hover:bg-orange-950 transition-colors rounded-xl px-4 py-3.5"
+                className="flex items-center justify-between bg-amber-800 hover:bg-amber-900 transition-colors rounded-xl px-4 py-3.5"
               >
                 <div className="flex items-center gap-2.5">
-                  <Phone size={15} className="text-amber-300 shrink-0" />
+                  <Phone size={15} className="text-amber-200 shrink-0" />
                   <span className="font-extrabold text-white text-lg tracking-wide">
                     01717529860
                   </span>
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 border border-amber-500 px-2.5 py-1 rounded-lg">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-200 border border-amber-600 px-2.5 py-1 rounded-lg">
                   Tap to Call
                 </span>
               </a>
