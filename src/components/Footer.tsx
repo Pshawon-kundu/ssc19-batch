@@ -90,27 +90,7 @@ export function Footer() {
               </div>
             </div>
 
-            <div className="mt-6">
-              <h4 className="font-semibold mb-2">Follow Us</h4>
-              <div className="flex gap-3">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-emerald-700 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors"
-                >
-                  <span className="text-xl">f</span>
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:shadow-lg transition-all"
-                >
-                  <span className="text-xl">📷</span>
-                </a>
-              </div>
-            </div>
+
           </div>
         </div>
 
