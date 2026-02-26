@@ -69,10 +69,13 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-200">
-                    General Queries
+                    Feedback & Complaints
                   </p>
                   <p className="text-sm font-semibold text-white mt-0.5">
-                    Comments or questions?
+                    Strictly for suggestions, Complaint & Feedback
+                  </p>
+                  <p className="text-xs text-emerald-100 mt-1">
+                    Contact Belal Abdullah Anas
                   </p>
                 </div>
               </div>
@@ -83,7 +86,7 @@ export function ContactSection() {
                 <div className="flex items-center gap-2.5">
                   <Phone size={15} className="text-emerald-300 shrink-0" />
                   <span className="font-extrabold text-white text-base tracking-wide">
-                    01786-571200
+                    01786571200
                   </span>
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-300 border border-emerald-500 px-2.5 py-1 rounded-lg">
@@ -104,6 +107,9 @@ export function ContactSection() {
                   </p>
                   <p className="text-sm font-semibold text-white mt-0.5">
                     Website / payment problems?
+                  </p>
+                  <p className="text-xs text-amber-100 mt-1">
+                    Contact Provat Kundu
                   </p>
                 </div>
               </div>
@@ -162,7 +168,7 @@ export function ContactSection() {
                   <p className="text-gray-400 text-sm max-w-xs">
                     WhatsApp is opening with your message pre-filled to{" "}
                     <span className="font-semibold text-gray-600">
-                      01786-571200
+                      01786571200
                     </span>
                     .
                   </p>
@@ -212,7 +218,7 @@ export function ContactSection() {
                   <p className="text-center text-xs text-gray-400 pt-1">
                     Message will be sent to{" "}
                     <span className="font-semibold text-gray-600">
-                      01786-571200
+                      01786571200
                     </span>
                   </p>
                 </form>
