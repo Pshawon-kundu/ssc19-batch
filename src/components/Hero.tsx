@@ -5,7 +5,7 @@ import {
   Banknote,
   Sparkles,
   Moon,
-  ArrowRight,
+  ArrowDown,
   TrendingUp,
 } from "lucide-react";
 import { motion } from "motion/react";
@@ -538,10 +538,10 @@ export function Hero({
                     <span>Join the Reunion Now</span>
                     <motion.div
                       className="relative"
-                      animate={{ x: [0, 6, 0] }}
+                      animate={{ y: [0, 6, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     >
-                      <ArrowRight size={24} strokeWidth={2.5} />
+                      <ArrowDown size={24} strokeWidth={2.5} />
                     </motion.div>
                   </span>
                 </button>
