@@ -8,6 +8,7 @@ import { Footer } from "../components/Footer";
 import { ContactSection } from "../components/ContactSection";
 import { SuccessModal } from "../components/SuccessModal";
 import { ErrorModal } from "../components/ErrorModal";
+import { BotChat } from "../components/BotChat";
 import { submitRegistration, fetchStats } from "../api";
 import type { RegistrationData } from "../api";
 
@@ -153,6 +154,8 @@ export function EventPage() {
         onClose={() => setShowError(false)}
         message={errorMessage}
       />
+
+      <BotChat />
     </div>
   );
 }
