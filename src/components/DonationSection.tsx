@@ -331,7 +331,7 @@ export function DonationSection() {
                           className="max-w-full max-h-full object-contain"
                         />
                       </div>
-                      <span className="text-xs font-semibold text-gray-800 text-center leading-tight">
+                      <span className="text-xs sm:text-sm font-semibold text-gray-800 text-center leading-tight">
                         {method.name}
                       </span>
                     </button>
@@ -447,9 +447,9 @@ export function DonationSection() {
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full"
+            className="bg-white rounded-2xl shadow-2xl p-5 sm:p-8 max-w-md w-full"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
               Verify Transaction
             </h3>
             <p className="text-gray-600 mb-8">
@@ -551,41 +551,43 @@ export function DonationSection() {
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-white rounded-2xl shadow-2xl p-8 sm:p-10 max-w-md w-full text-center"
+            className="bg-white rounded-2xl shadow-2xl p-5 sm:p-10 max-w-md w-full text-center"
           >
             <motion.div
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 0.6 }}
-              className="mb-8"
+              className="mb-6 sm:mb-8"
             >
-              <Heart className="w-16 h-16 text-pink-600 mx-auto fill-pink-600" />
+              <Heart className="w-14 sm:w-16 h-14 sm:h-16 text-pink-600 mx-auto fill-pink-600" />
             </motion.div>
 
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               Thank You!
             </h3>
 
-            <p className="text-gray-600 mb-2 text-lg">
+            <p className="text-gray-600 mb-1 text-base sm:text-lg">
               We will verify your donation process
             </p>
-            <p className="text-gray-600 mb-8 text-lg">and notify you soon.</p>
+            <p className="text-gray-600 mb-6 sm:mb-8 text-base sm:text-lg">
+              and notify you soon.
+            </p>
 
-            <div className="bg-pink-50 border-2 border-pink-200 rounded-lg p-5 mb-8">
-              <p className="text-sm text-gray-600 mb-3">
+            <div className="bg-pink-50 border-2 border-pink-200 rounded-lg p-4 sm:p-5 mb-6 sm:mb-8">
+              <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
                 <strong>Amount:</strong> ৳{finalAmount}
               </p>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
                 <strong>Last 3 Digit:</strong> {last3Digit}
               </p>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
                 <strong>Transaction ID:</strong> {transactionId}
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs sm:text-sm text-gray-600">
                 <strong>Donor:</strong> {donorName}
               </p>
             </div>
 
-            <p className="text-sm text-gray-500">
+            <p className="text-xs sm:text-sm text-gray-500">
               You will receive a confirmation email shortly
             </p>
           </motion.div>

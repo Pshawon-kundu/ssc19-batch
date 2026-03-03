@@ -495,13 +495,13 @@ export function RegistrationForm({
                           <label className="block text-sm font-semibold text-gray-700 mb-3">
                             Jersey Size *
                           </label>
-                          <div className="grid grid-cols-5 gap-2.5">
+                          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5">
                             {["S", "M", "L", "XL", "XXL"].map((size) => (
                               <button
                                 key={size}
                                 type="button"
                                 onClick={() => handleChange("jerseySize", size)}
-                                className={`h-[3.5rem] px-4 py-3 border-2 rounded-xl text-sm sm:text-base font-bold transition-all ${
+                                className={`h-[3.5rem] px-3 py-3 border-2 rounded-xl text-base sm:text-lg font-bold transition-all ${
                                   formData.jerseySize === size
                                     ? "border-emerald-600 bg-emerald-600 text-white shadow-md scale-105"
                                     : "border-gray-200 text-gray-600 hover:border-emerald-400 hover:bg-gray-50"
