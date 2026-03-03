@@ -4,6 +4,7 @@ import { Hero } from "../components/Hero";
 import { Packages } from "../components/Packages";
 import { Album } from "../components/Album";
 import { RegistrationForm } from "../components/RegistrationForm";
+import { DonationSection } from "../components/DonationSection";
 import { Footer } from "../components/Footer";
 import { ContactSection } from "../components/ContactSection";
 import { SuccessModal } from "../components/SuccessModal";
@@ -101,14 +102,35 @@ export function EventPage() {
   };
 
   const scrollToRegistration = () => {
-    console.log("scrollToRegistration called");
+    console.log("=== SCROLL TO REGISTRATION CALLED ===");
+
     const element = document.getElementById("registration");
-    console.log("Element found:", element);
+    console.log("Found element:", element);
+
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      console.log("Scrolled to registration form");
+      // Get position
+      const rect = element.getBoundingClientRect();
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const targetY = rect.top + scrollTop - 100;
+
+      console.log("Scrolling to position:", targetY);
+
+      // Jump instantly
+      window.scrollTo({
+        top: targetY,
+        behavior: "auto",
+      });
+
+      console.log("✅ SCROLLED!");
     } else {
-      console.warn("Registration element not found!");
+      console.error("❌ Registration element NOT FOUND!");
+      // Try to find it
+      const all = document.querySelectorAll("[id]");
+      console.log(
+        "All elements with IDs:",
+        Array.from(all).map((el) => el.id),
+      );
     }
   };
 
@@ -138,6 +160,8 @@ export function EventPage() {
         onSubmit={handleRegistrationSubmit}
         isSubmitting={isSubmitting}
       />
+
+      <DonationSection />
 
       <ContactSection />
 

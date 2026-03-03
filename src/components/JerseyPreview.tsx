@@ -1,5 +1,6 @@
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import { motion } from 'motion/react';
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { motion } from "motion/react";
+import jerseyImage from "../assets/j.jpg";
 
 export function JerseyPreview() {
   return (
@@ -12,10 +13,10 @@ export function JerseyPreview() {
       <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
         Jersey Preview 👕
       </h3>
-      
+
       <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-emerald-100 to-amber-100 mb-4">
         <ImageWithFallback
-          src="https://assets.adidas.com/images/w_600,f_auto,q_auto/b5aa77229eae4cf79d8545be09930b4f_9366/Argentina_26_Home_Messi_Kids_Jersey_White_KA8115_42_detail.jpg"
+          src={jerseyImage}
           alt="SSC 2019 Jersey"
           className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
         />

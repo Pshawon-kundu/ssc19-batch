@@ -315,7 +315,7 @@ export function RegistrationForm({
                         id="name"
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
-                        className={`w-full px-4 py-3.5 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
+                        className={`w-full h-[3.5rem] px-4 py-3 border-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
                           errors.name
                             ? "border-red-400 bg-red-50"
                             : "border-gray-200 hover:border-gray-300 bg-white"
@@ -338,7 +338,7 @@ export function RegistrationForm({
                         Phone Number <span className="text-red-500">*</span>
                       </label>
                       <div className="flex">
-                        <span className="inline-flex items-center px-4 border-2 border-r-0 rounded-l-xl text-xs font-bold text-gray-500 bg-gray-50 border-gray-200 select-none shrink-0">
+                        <span className="inline-flex items-center h-[3.5rem] px-4 border-2 border-r-0 rounded-l-xl text-xs font-bold text-gray-500 bg-gray-50 border-gray-200 select-none shrink-0">
                           +880
                         </span>
                         <input
@@ -348,7 +348,7 @@ export function RegistrationForm({
                           onChange={(e) =>
                             handleChange("phone", e.target.value)
                           }
-                          className={`flex-1 px-4 py-3.5 border-2 rounded-r-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
+                          className={`flex-1 h-[3.5rem] px-4 py-3 border-2 rounded-r-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all ${
                             errors.phone
                               ? "border-red-400 bg-red-50"
                               : "border-gray-200 hover:border-gray-300 bg-white"
@@ -374,7 +374,7 @@ export function RegistrationForm({
                       <label className="block text-sm font-semibold text-gray-700 mb-3">
                         Select Contribution *
                       </label>
-                      <div className="grid grid-cols-1 gap-3 sm:gap-4">
+                      <div className="grid grid-cols-1 gap-2.5">
                         {(
                           [
                             {
@@ -405,7 +405,7 @@ export function RegistrationForm({
                         ).map(({ key, label, icon, desc }) => (
                           <label
                             key={key}
-                            className={`relative flex items-start gap-3 p-4 sm:p-5 border-2 rounded-2xl cursor-pointer transition-all select-none min-h-[5rem] sm:min-h-[5.5rem] ${
+                            className={`relative flex items-center gap-3 px-4 py-3 border-2 rounded-lg cursor-pointer transition-all select-none h-[3.5rem] ${
                               formData.package === key
                                 ? "border-emerald-500 bg-emerald-50 shadow-md ring-2 ring-emerald-100"
                                 : "border-gray-200 bg-white hover:border-emerald-300 hover:bg-gray-50 hover:shadow-sm"
@@ -426,7 +426,7 @@ export function RegistrationForm({
                             />
                             {/* Custom radio dot */}
                             <div
-                              className={`mt-1 w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
+                              className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
                                 formData.package === key
                                   ? "border-emerald-600 bg-emerald-600"
                                   : "border-gray-300 bg-white"
@@ -436,36 +436,31 @@ export function RegistrationForm({
                                 <div className="w-2 h-2 rounded-full bg-white" />
                               )}
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-1.5 mb-1">
-                                <span className="text-lg sm:text-xl leading-none">
-                                  {icon}
-                                </span>
-                                <span
-                                  className={`font-bold text-sm sm:text-base leading-tight ${
-                                    formData.package === key
-                                      ? "text-emerald-800"
-                                      : "text-gray-800"
-                                  }`}
-                                >
-                                  {label}
-                                </span>
-                              </div>
-                              <div className="text-xs sm:text-sm text-gray-400 mb-2">
-                                {desc}
-                              </div>
-                              <div
-                                className={`text-lg sm:text-xl font-extrabold ${
+                            <div className="flex items-center gap-2 flex-1 min-w-0">
+                              <span className="text-base leading-none">
+                                {icon}
+                              </span>
+                              <span
+                                className={`font-medium text-sm leading-tight ${
                                   formData.package === key
-                                    ? "text-emerald-600"
-                                    : "text-emerald-500"
+                                    ? "text-emerald-800"
+                                    : "text-gray-700"
                                 }`}
                               >
-                                ৳{packagePrices[key]}
-                              </div>
+                                {label}
+                              </span>
+                            </div>
+                            <div
+                              className={`text-base font-semibold mr-8 ${
+                                formData.package === key
+                                  ? "text-emerald-600"
+                                  : "text-emerald-500"
+                              }`}
+                            >
+                              ৳{packagePrices[key]}
                             </div>
                             {formData.package === key && (
-                              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                              <div className="absolute top-1/2 -translate-y-1/2 right-3 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
                                 <svg
                                   viewBox="0 0 12 12"
                                   fill="none"
@@ -500,13 +495,13 @@ export function RegistrationForm({
                           <label className="block text-sm font-semibold text-gray-700 mb-3">
                             Jersey Size *
                           </label>
-                          <div className="grid grid-cols-5 gap-2 sm:gap-3">
+                          <div className="grid grid-cols-5 gap-2.5">
                             {["S", "M", "L", "XL", "XXL"].map((size) => (
                               <button
                                 key={size}
                                 type="button"
                                 onClick={() => handleChange("jerseySize", size)}
-                                className={`h-11 sm:h-12 border-2 rounded-xl text-sm sm:text-base font-bold transition-all ${
+                                className={`h-[3.5rem] px-4 py-3 border-2 rounded-xl text-sm sm:text-base font-bold transition-all ${
                                   formData.jerseySize === size
                                     ? "border-emerald-600 bg-emerald-600 text-white shadow-md scale-105"
                                     : "border-gray-200 text-gray-600 hover:border-emerald-400 hover:bg-gray-50"

@@ -512,47 +512,28 @@ export function Hero({
             />
 
             {/* Main CTA Button */}
-            <div className="relative">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log("Button clicked!");
+            <div className="relative z-50" style={{ pointerEvents: "auto" }}>
+              <button
+                type="button"
+                onMouseDown={() => {
+                  console.log("MOUSE DOWN!");
+                }}
+                onClick={() => {
+                  console.log("=== BUTTON CLICKED! ===");
+                  console.log("onRegisterClick function:", onRegisterClick);
+                  if (typeof onRegisterClick === "function") {
                     onRegisterClick();
-                  }}
-                  className="group relative w-full sm:w-auto inline-flex justify-center items-center gap-3 px-12 py-6 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 text-white rounded-full font-bold text-xl shadow-2xl hover:shadow-3xl transition-all overflow-hidden border-2 border-emerald-400 cursor-pointer hover:bg-gradient-to-r hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-800"
-                >
-                  {/* Animated background layer */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-600 opacity-0 group-hover:opacity-20 transition-opacity rounded-full"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                  />
-
-                  {/* Content */}
-                  <span className="relative flex items-center gap-3">
-                    <span>Join the Reunion Now</span>
-                    <motion.div
-                      className="relative"
-                      animate={{ y: [0, 6, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <ArrowDown size={24} strokeWidth={2.5} />
-                    </motion.div>
-                  </span>
-                </button>
-              </motion.div>
-
-              {/* Pulse ring effect */}
-              <motion.div
-                animate={{ scale: [1, 1.2], opacity: [0.8, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-0 rounded-full border-2 border-emerald-400 -z-10"
-              />
+                    console.log("Function called successfully!");
+                  } else {
+                    console.error("onRegisterClick is not a function!");
+                  }
+                }}
+                className="relative w-full sm:w-auto inline-flex justify-center items-center gap-3 px-12 py-6 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 text-white rounded-full font-bold text-xl shadow-2xl hover:shadow-emerald-500/50 transition-all border-2 border-emerald-400 cursor-pointer hover:bg-emerald-600 active:scale-95"
+                style={{ pointerEvents: "auto", zIndex: 9999 }}
+              >
+                <span>Join the Reunion Now</span>
+                <ArrowDown size={24} strokeWidth={2.5} />
+              </button>
             </div>
 
             {/* CTA Description */}
@@ -561,9 +542,6 @@ export function Hero({
               transition={{ duration: 3, repeat: Infinity }}
               className="text-center space-y-3"
             >
-              <p className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-emerald-700 to-emerald-600 bg-clip-text text-transparent">
-                Limited Spots Available
-              </p>
               <p className="text-gray-600 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
                 Don't miss this chance to{" "}
                 <span className="font-semibold text-emerald-600">

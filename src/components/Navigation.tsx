@@ -9,6 +9,7 @@ export function Navigation() {
     { label: "Packages", href: "#packages" },
     { label: "Album", href: "#album" },
     { label: "Register", href: "#registration" },
+    { label: "Donate", href: "#donate" },
     { label: "Contact", href: "#contact" },
   ];
 
