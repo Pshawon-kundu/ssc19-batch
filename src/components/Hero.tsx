@@ -396,41 +396,51 @@ export function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 py-6"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 py-6 max-w-xl mx-auto"
           >
             <motion.div
               whileHover={{
-                scale: 1.05,
-                boxShadow: "0 20px 25px rgba(16, 185, 129, 0.3)",
+                scale: 1.03,
+                boxShadow: "0 12px 24px rgba(16, 185, 129, 0.2)",
               }}
-              className="flex items-center gap-3 sm:gap-4 bg-white w-full sm:w-auto px-5 sm:px-8 py-4 rounded-2xl shadow-lg border-2 border-emerald-100"
+              className="flex items-center gap-4 bg-white w-full sm:w-auto px-6 py-5 rounded-2xl shadow-md border-2 border-emerald-100 hover:border-emerald-200 transition-all"
             >
-              <Calendar className="text-emerald-600" size={28} />
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
+                <Calendar className="text-emerald-600" size={22} />
+              </div>
               <div className="text-left">
-                <div className="text-sm text-gray-500 font-semibold">Date</div>
-                <div className="font-bold text-gray-900 text-lg">
+                <div className="text-xs text-gray-400 font-semibold uppercase tracking-wider">
+                  Date
+                </div>
+                <div className="font-bold text-gray-900 text-lg leading-tight">
                   27th Ramadan
                 </div>
-                <div className="text-xs text-gray-600">March 17, 2026</div>
+                <div className="text-sm text-gray-500 mt-0.5">
+                  March 17, 2026
+                </div>
               </div>
             </motion.div>
 
             <motion.div
               whileHover={{
-                scale: 1.05,
-                boxShadow: "0 20px 25px rgba(59, 130, 246, 0.3)",
+                scale: 1.03,
+                boxShadow: "0 12px 24px rgba(59, 130, 246, 0.2)",
               }}
-              className="flex items-center gap-3 sm:gap-4 bg-white w-full sm:w-auto px-5 sm:px-8 py-4 rounded-2xl shadow-lg border-2 border-blue-100"
+              className="flex items-center gap-4 bg-white w-full sm:w-auto px-6 py-5 rounded-2xl shadow-md border-2 border-blue-100 hover:border-blue-200 transition-all"
             >
-              <MapPin className="text-blue-600" size={28} />
+              <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+                <MapPin className="text-blue-600" size={22} />
+              </div>
               <div className="text-left">
-                <div className="text-sm text-gray-500 font-semibold">
+                <div className="text-xs text-gray-400 font-semibold uppercase tracking-wider">
                   Location
                 </div>
-                <div className="font-bold text-gray-900 text-lg">
+                <div className="font-bold text-gray-900 text-lg leading-tight">
                   School Field
                 </div>
-                <div className="text-xs text-gray-600">5:00 PM Onwards</div>
+                <div className="text-sm text-gray-500 mt-0.5">
+                  5:00 PM Onwards
+                </div>
               </div>
             </motion.div>
           </motion.div>

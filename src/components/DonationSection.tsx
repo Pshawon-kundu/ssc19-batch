@@ -57,7 +57,7 @@ const paymentMethods = [
 ];
 
 export function DonationSection() {
-  const [selectedAmount, setSelectedAmount] = useState<number>(250);
+  const [selectedAmount, setSelectedAmount] = useState<number>(0);
   const [customAmount, setCustomAmount] = useState<string>("");
   const [selectedMethod, setSelectedMethod] = useState<string>("bkash");
   const [copiedNumber, setCopiedNumber] = useState(false);
@@ -176,9 +176,10 @@ export function DonationSection() {
           viewport={{ once: true }}
         >
           {/* Optional notice bar */}
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <span className="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-emerald-300">
-              ✅ Registration Complete? Already Registered!
+          <div className="flex items-center justify-center mb-5">
+            <span className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 text-[11px] sm:text-xs font-semibold px-4 py-2 rounded-full border border-emerald-200 shadow-sm">
+              <span className="text-emerald-500 text-sm">✅</span>
+              <span>Registration complete? Already registered!</span>
             </span>
           </div>
 
@@ -189,38 +190,48 @@ export function DonationSection() {
             className="w-full group"
           >
             <div
-              className={`rounded-2xl border-2 transition-all duration-300 px-6 py-5 sm:px-8 sm:py-6 ${isExpanded ? "border-red-300 bg-red-50 shadow-lg" : "border-dashed border-red-200 bg-white hover:border-red-300 hover:bg-red-50 shadow-sm"}`}
+              className={`rounded-2xl border-2 transition-all duration-300 px-5 py-4 sm:px-8 sm:py-6 ${isExpanded ? "border-red-300 bg-red-50 shadow-lg" : "border-dashed border-red-200 bg-white hover:border-red-300 hover:bg-red-50 shadow-sm"}`}
             >
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3 sm:gap-4 text-left">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-red-100 to-pink-100 border-2 border-red-200 flex items-center justify-center shrink-0">
-                    <Gift className="text-red-500" size={20} />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-                        Make a Donation
-                      </h2>
-                      <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-700 text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full border border-amber-300">
-                        OPTIONAL
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-500 mt-0.5">
-                      Completely voluntary — not required to join the event
-                    </p>
-                  </div>
+              <div className="flex items-center gap-3 sm:gap-4">
+                {/* Gift icon */}
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-red-100 to-pink-100 border border-red-200 flex items-center justify-center shrink-0">
+                  <Gift className="text-red-500" size={20} />
                 </div>
+
+                {/* Title + description */}
+                <div className="flex-1 min-w-0 text-left">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg sm:text-2xl font-bold text-gray-900 leading-tight">
+                      Make a Donation
+                    </h2>
+                    <span className="hidden sm:inline-flex items-center bg-amber-100 text-amber-700 text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full border border-amber-300">
+                      Optional
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-0.5 leading-snug">
+                    Completely voluntary — not required to join
+                  </p>
+                </div>
+
+                {/* Chevron */}
                 <motion.div
                   animate={{ rotate: isExpanded ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
-                  className="shrink-0 w-9 h-9 rounded-full bg-red-100 border border-red-200 flex items-center justify-center"
+                  className="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-red-100 border border-red-200 flex items-center justify-center"
                 >
-                  <ChevronDown className="text-red-500" size={20} />
+                  <ChevronDown className="text-red-500" size={18} />
                 </motion.div>
               </div>
 
+              {/* Mobile-only optional badge */}
+              <div className="flex sm:hidden mt-2">
+                <span className="inline-flex items-center bg-amber-50 text-amber-600 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border border-amber-200">
+                  Optional
+                </span>
+              </div>
+
               {!isExpanded && (
-                <p className="text-xs sm:text-sm text-gray-400 mt-3 border-t border-dashed border-red-100 pt-3">
+                <p className="text-xs sm:text-sm text-gray-400 mt-3 border-t border-dashed border-red-100 pt-3 leading-relaxed">
                   💛 Want to help support those who can't afford to attend? Tap
                   to donate — every bit counts.
                 </p>
@@ -264,8 +275,12 @@ export function DonationSection() {
                       <motion.button
                         key={tier.id}
                         onClick={() => {
-                          setSelectedAmount(tier.amount);
-                          setCustomAmount("");
+                          if (selectedAmount === tier.amount) {
+                            setSelectedAmount(0);
+                          } else {
+                            setSelectedAmount(tier.amount);
+                            setCustomAmount("");
+                          }
                         }}
                         whileHover={{ scale: 1.04 }}
                         whileTap={{ scale: 0.96 }}
@@ -288,17 +303,20 @@ export function DonationSection() {
 
                   {/* Custom amount */}
                   <div className="relative mb-4">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-base">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 font-semibold text-lg pointer-events-none">
                       ৳
                     </span>
                     <input
                       type="number"
                       value={customAmount}
-                      onChange={(e) => setCustomAmount(e.target.value)}
+                      onChange={(e) => {
+                        setCustomAmount(e.target.value);
+                        setSelectedAmount(0);
+                      }}
                       min={100}
                       max={5000}
                       placeholder="Other amount (100 – 5,000)"
-                      className="w-full pl-8 pr-4 py-2.5 border-2 border-dashed border-gray-300 rounded-xl focus:outline-none focus:border-red-400 text-sm"
+                      className="w-full pl-10 pr-4 py-2.5 border-2 border-dashed border-gray-300 rounded-xl focus:outline-none focus:border-red-400 text-sm"
                     />
                   </div>
 
