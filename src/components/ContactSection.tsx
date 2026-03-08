@@ -28,7 +28,7 @@ export function ContactSection() {
   return (
     <section
       id="comments"
-      className="py-16 sm:py-20 bg-white border-t border-gray-100"
+      className="py-20 sm:py-28 bg-white border-t-2 border-gray-100 overflow-x-hidden"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}

@@ -70,13 +70,13 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 space-y-2 border-t border-emerald-100">
+          <div className="md:hidden py-2 border-t border-emerald-100">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className="block py-2 text-gray-700 hover:text-emerald-600 transition-colors font-medium"
+                className="flex items-center px-2 py-3.5 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors font-medium text-base"
               >
                 {item.label}
               </a>

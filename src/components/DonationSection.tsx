@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { motion } from "motion/react";
-import { Heart, Copy, Check } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { Heart, Copy, Check, ChevronDown, Gift } from "lucide-react";
 import { config } from "../config";
 import { submitDonation } from "../api";
 
@@ -11,31 +11,24 @@ import rocketLogo from "../assets/payment/rocket.png";
 const donationTiers = [
   {
     id: "tier1",
-    amount: 500,
-    title: "Supporter",
-    description: "Support one meal",
-    icon: "🍚",
+    amount: 100,
+    title: "Small Help",
+    description: "Joy for a child's Eid",
+    icon: "🌙",
   },
   {
     id: "tier2",
-    amount: 1000,
-    title: "Friend",
-    description: "Support two meals",
-    icon: "🍜",
+    amount: 250,
+    title: "Sweet Eid",
+    description: "Eid gift for a family",
+    icon: "🎁",
   },
   {
     id: "tier3",
-    amount: 2500,
-    title: "Benefactor",
-    description: "Support family package",
-    icon: "👨‍👩‍👧‍👦",
-  },
-  {
-    id: "tier4",
-    amount: 5000,
-    title: "Guardian",
-    description: "Support full event",
-    icon: "🌟",
+    amount: 500,
+    title: "Eid Mubarak",
+    description: "Eid joy for two families",
+    icon: "🤲",
   },
 ];
 
@@ -64,7 +57,7 @@ const paymentMethods = [
 ];
 
 export function DonationSection() {
-  const [selectedAmount, setSelectedAmount] = useState<number>(1000);
+  const [selectedAmount, setSelectedAmount] = useState<number>(250);
   const [customAmount, setCustomAmount] = useState<string>("");
   const [selectedMethod, setSelectedMethod] = useState<string>("bkash");
   const [copiedNumber, setCopiedNumber] = useState(false);
@@ -142,7 +135,7 @@ export function DonationSection() {
           setDonorName("");
           setDonorPhone("");
           setCustomAmount("");
-          setSelectedAmount(1000);
+          setSelectedAmount(250);
         }, 3000);
       } else {
         setVerificationError(
@@ -159,285 +152,259 @@ export function DonationSection() {
     }
   };
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <section
       id="donate"
-      className="py-20 sm:py-28 bg-gradient-to-br from-red-50 via-white to-pink-50"
+      className="py-20 sm:py-28 bg-gradient-to-br from-red-50 via-white to-pink-50 overflow-x-hidden"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* ── Separator banner ── */}
+        <div className="flex items-center gap-4 mb-8">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-red-200 to-transparent" />
+          <span className="text-xs font-bold uppercase tracking-widest text-red-400 whitespace-nowrap">
+            ── Voluntary Section ──
+          </span>
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-red-200 to-transparent" />
+        </div>
+
+        {/* ── Toggle Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-4 mb-5">
-            <Heart className="text-red-500" size={32} fill="currentColor" />
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              Make a Donation
-            </h2>
-            <Heart className="text-red-500" size={32} fill="currentColor" />
+          {/* Optional notice bar */}
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-emerald-300">
+              ✅ Registration Complete? Already Registered!
+            </span>
           </div>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Help us support those in need. Your donation makes a meaningful
-            impact and ensures everyone can participate in this special reunion.
-          </p>
-        </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-10">
-          {/* Donation Tiers */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-1"
-          >
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                Choose Amount
-              </h3>
-
-              {/* Preset Amounts */}
-              <div className="space-y-3">
-                {donationTiers.map((tier) => (
-                  <motion.button
-                    key={tier.id}
-                    onClick={() => {
-                      setSelectedAmount(tier.amount);
-                      setCustomAmount("");
-                    }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`w-full p-6 rounded-lg border-2 transition-all text-left ${
-                      selectedAmount === tier.amount && !customAmount
-                        ? "border-red-500 bg-red-50"
-                        : "border-gray-200 hover:border-red-300 bg-white"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">{tier.icon}</span>
-                      <div className="flex-1">
-                        <p className="font-semibold text-gray-900">
-                          {tier.title}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {tier.description}
-                        </p>
-                      </div>
-                      <p className="font-bold text-red-600">{tier.amount}</p>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Custom Amount */}
-              <div className="mt-6 p-6 border-2 border-dashed border-gray-200 rounded-lg">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Custom Amount (৳)
-                </label>
-                <input
-                  type="number"
-                  value={customAmount}
-                  onChange={(e) => setCustomAmount(e.target.value)}
-                  placeholder="Enter custom amount"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Donation Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2"
+          {/* Clickable card to expand/collapse */}
+          <button
+            type="button"
+            onClick={() => setIsExpanded((v) => !v)}
+            className="w-full group"
           >
             <div
-              className={`rounded-2xl shadow-xl p-8 sm:p-10 transition-all duration-500 ${
-                isFormComplete
-                  ? "bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 border-3 border-orange-400 shadow-2xl shadow-orange-300/60"
-                  : "bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-slate-300 shadow-lg"
-              }`}
+              className={`rounded-2xl border-2 transition-all duration-300 px-6 py-5 sm:px-8 sm:py-6 ${isExpanded ? "border-red-300 bg-red-50 shadow-lg" : "border-dashed border-red-200 bg-white hover:border-red-300 hover:bg-red-50 shadow-sm"}`}
             >
-              {/* Donor Information */}
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-5">
-                  Donor Information
-                </h3>
-                <div className="space-y-5">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3 sm:gap-4 text-left">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-red-100 to-pink-100 border-2 border-red-200 flex items-center justify-center shrink-0">
+                    <Gift className="text-red-500" size={20} />
+                  </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">
-                      Name
-                    </label>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                        Make a Donation
+                      </h2>
+                      <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-700 text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full border border-amber-300">
+                        OPTIONAL
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-500 mt-0.5">
+                      Completely voluntary — not required to join the event
+                    </p>
+                  </div>
+                </div>
+                <motion.div
+                  animate={{ rotate: isExpanded ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="shrink-0 w-9 h-9 rounded-full bg-red-100 border border-red-200 flex items-center justify-center"
+                >
+                  <ChevronDown className="text-red-500" size={20} />
+                </motion.div>
+              </div>
+
+              {!isExpanded && (
+                <p className="text-xs sm:text-sm text-gray-400 mt-3 border-t border-dashed border-red-100 pt-3">
+                  💛 Want to help support those who can't afford to attend? Tap
+                  to donate — every bit counts.
+                </p>
+              )}
+            </div>
+          </button>
+        </motion.div>
+
+        {/* ── Collapsible Donation Form ── */}
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              key="donation-form"
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{ opacity: 1, height: "auto", marginTop: 32 }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              style={{ overflow: "hidden" }}
+            >
+              {/* Eid Charity Sub-header */}
+              <div className="text-center mb-5">
+                <p className="text-base sm:text-lg font-semibold text-rose-600">
+                  🌙 Help poor families celebrate Eid this year
+                </p>
+                <span className="inline-block mt-2 bg-green-50 text-green-700 text-xs font-semibold px-3 py-1 rounded-full border border-green-200">
+                  🔒 Completely separate from registration
+                </span>
+              </div>
+
+              <div className="max-w-lg mx-auto">
+                {/* Amount chips */}
+                <div
+                  className={`rounded-2xl shadow-lg p-4 sm:p-6 transition-all duration-500 ${
+                    isFormComplete
+                      ? "bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 border-2 border-orange-400 shadow-orange-200"
+                      : "bg-white border-2 border-gray-200"
+                  }`}
+                >
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {donationTiers.map((tier) => (
+                      <motion.button
+                        key={tier.id}
+                        onClick={() => {
+                          setSelectedAmount(tier.amount);
+                          setCustomAmount("");
+                        }}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.96 }}
+                        className={`p-2.5 sm:p-3 rounded-xl border-2 transition-all text-center ${
+                          selectedAmount === tier.amount && !customAmount
+                            ? "border-red-500 bg-red-50"
+                            : "border-gray-200 hover:border-red-300 bg-white"
+                        }`}
+                      >
+                        <div className="text-xl mb-0.5">{tier.icon}</div>
+                        <div className="text-xs font-bold text-gray-900">
+                          ৳ {tier.amount}
+                        </div>
+                        <div className="text-[10px] text-gray-500 leading-tight mt-0.5">
+                          {tier.title}
+                        </div>
+                      </motion.button>
+                    ))}
+                  </div>
+
+                  {/* Custom amount */}
+                  <div className="relative mb-4">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-base">
+                      ৳
+                    </span>
+                    <input
+                      type="number"
+                      value={customAmount}
+                      onChange={(e) => setCustomAmount(e.target.value)}
+                      min={100}
+                      max={5000}
+                      placeholder="Other amount (100 – 5,000)"
+                      className="w-full pl-8 pr-4 py-2.5 border-2 border-dashed border-gray-300 rounded-xl focus:outline-none focus:border-red-400 text-sm"
+                    />
+                  </div>
+
+                  {/* Name + Phone */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
                     <input
                       type="text"
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
                       placeholder="Your name"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-red-500 transition-colors"
+                      className="px-3 py-2.5 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-red-400 text-sm"
                     />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">
-                      Phone Number
-                    </label>
                     <input
                       type="tel"
                       value={donorPhone}
                       onChange={(e) => setDonorPhone(e.target.value)}
-                      placeholder="01XXXXXXXXX"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-red-500 transition-colors"
+                      placeholder="Phone number"
+                      className="px-3 py-2.5 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-red-400 text-sm"
                     />
                   </div>
-                </div>
-              </div>
 
-              {/* Amount Summary */}
-              <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-6 mb-8 border-2 border-red-200">
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold text-gray-900">
-                    Total Donation:
-                  </span>
-                  <span className="text-3xl font-bold text-red-600">
-                    ৳{finalAmount}
-                  </span>
-                </div>
-              </div>
+                  {/* Payment methods */}
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {paymentMethods.map((method) => (
+                      <button
+                        key={method.id}
+                        type="button"
+                        onClick={() => setSelectedMethod(method.id)}
+                        className={`flex flex-col items-center gap-1.5 p-2 rounded-xl border-2 transition-all ${
+                          selectedMethod === method.id
+                            ? "border-red-500 bg-red-50 shadow-md scale-105"
+                            : "border-gray-200 bg-white hover:border-red-300"
+                        }`}
+                      >
+                        <div className="w-10 h-7 flex items-center justify-center">
+                          <img
+                            src={method.icon}
+                            alt={method.name}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                        <span className="text-[10px] font-semibold text-gray-700">
+                          {method.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
 
-              {/* Payment Methods */}
-              {/* Payment Methods */}
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-5">
-                  Payment Method
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-                  {paymentMethods.map((method) => (
-                    <button
-                      key={method.id}
+                  {/* Merchant number */}
+                  {selectedPayment && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex items-center gap-2 mb-4 bg-blue-50 rounded-xl p-3 border border-blue-200"
+                    >
+                      <span className="text-xs text-gray-600 shrink-0">
+                        📱 Send to:
+                      </span>
+                      <span className="flex-1 text-sm font-bold text-gray-900 tracking-wider">
+                        {selectedPayment.number}
+                      </span>
+                      <motion.button
+                        onClick={() => copyToClipboard(selectedPayment.number)}
+                        whileTap={{ scale: 0.9 }}
+                        className="p-1.5 bg-blue-500 text-white rounded-lg"
+                      >
+                        {copiedNumber ? (
+                          <Check size={14} />
+                        ) : (
+                          <Copy size={14} />
+                        )}
+                      </motion.button>
+                    </motion.div>
+                  )}
+
+                  {/* Submit row */}
+                  <div className="flex items-center gap-3">
+                    <div className="text-lg font-bold text-red-600">
+                      ৳ {finalAmount}
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.96 }}
+                      onClick={handleCompleteDonation}
+                      disabled={!donorName || !donorPhone || !finalAmount}
                       type="button"
-                      onClick={() => setSelectedMethod(method.id)}
-                      className={`w-full h-auto min-h-28 px-4 py-5 rounded-lg border-2 transition-all flex flex-col items-center justify-center gap-3 ${
-                        selectedMethod === method.id
-                          ? "border-red-500 bg-red-50 shadow-lg scale-105"
-                          : "border-gray-300 bg-white hover:border-red-400 hover:shadow-md"
+                      className={`flex-1 py-3 font-bold rounded-xl transition-all text-sm ${
+                        isFormComplete
+                          ? "bg-gradient-to-r from-orange-500 to-pink-600 text-white shadow-lg shadow-red-400/40"
+                          : "bg-gray-200 text-gray-400 cursor-not-allowed"
                       }`}
                     >
-                      <div className="w-16 h-10 flex items-center justify-center flex-shrink-0">
-                        <img
-                          src={method.icon}
-                          alt={method.name}
-                          className="max-w-full max-h-full object-contain"
-                        />
-                      </div>
-                      <span className="text-xs sm:text-sm font-semibold text-gray-800 text-center leading-tight">
-                        {method.name}
-                      </span>
-                    </button>
-                  ))}
+                      <Heart className="inline-block mr-1.5" size={16} />
+                      Donate ৳ {finalAmount}
+                    </motion.button>
+                  </div>
+
+                  <p className="text-center text-[11px] text-gray-400 mt-3">
+                    💛 Your donation brings Eid joy to a family — every bit
+                    counts
+                  </p>
                 </div>
               </div>
-
-              {/* Payment Details */}
-              {selectedPayment && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-8 border-2 border-blue-200"
-                >
-                  <h4 className="font-semibold text-gray-900 mb-6">
-                    📱 Payment Details
-                  </h4>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm text-gray-600 mb-3">
-                        Merchant Number:
-                      </p>
-                      <div className="flex items-center gap-3">
-                        <input
-                          type="text"
-                          value={selectedPayment.number}
-                          readOnly
-                          className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 font-semibold"
-                        />
-                        <motion.button
-                          onClick={() =>
-                            copyToClipboard(selectedPayment.number)
-                          }
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          className="p-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-                        >
-                          {copiedNumber ? (
-                            <Check size={20} />
-                          ) : (
-                            <Copy size={20} />
-                          )}
-                        </motion.button>
-                      </div>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg border border-yellow-200">
-                      <p className="text-xs text-yellow-700">
-                        💡 Send <strong>৳{finalAmount}</strong> to this number
-                        and screenshot the confirmation
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Submit Button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleCompleteDonation}
-                disabled={!donorName || !donorPhone || !finalAmount}
-                type="button"
-                className={`w-full mt-8 px-6 py-4 font-bold rounded-lg hover:shadow-lg transition-all duration-500 ${
-                  isFormComplete
-                    ? "bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 text-white shadow-xl shadow-red-500/50"
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                }`}
-              >
-                <Heart className="inline-block mr-2" size={20} />
-                Complete Donation ৳{finalAmount}
-              </motion.button>
-
-              <p className="text-center text-xs text-gray-800 font-medium mt-5">
-                After payment, we will verify and record your generous donation
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Impact Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 grid sm:grid-cols-3 gap-6"
-        >
-          <div className="text-center p-6 rounded-lg bg-white shadow-md border-2 border-red-100">
-            <Heart className="mx-auto mb-3 text-red-500" size={32} />
-            <p className="text-gray-600 text-sm">
-              <strong>Every donation</strong> makes a real difference in our
-              community
-            </p>
-          </div>
-          <div className="text-center p-6 rounded-lg bg-white shadow-md border-2 border-red-100">
-            <Heart className="mx-auto mb-3 text-red-500" size={32} />
-            <p className="text-gray-600 text-sm">
-              <strong>100% transparent</strong> - Track where your money goes
-            </p>
-          </div>
-          <div className="text-center p-6 rounded-lg bg-white shadow-md border-2 border-red-100">
-            <Heart className="mx-auto mb-3 text-red-500" size={32} />
-            <p className="text-gray-600 text-sm">
-              <strong>Tax exempt</strong> - Donations may be tax-deductible
-            </p>
-          </div>
-        </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Verification Modal */}
@@ -459,7 +426,7 @@ export function DonationSection() {
             {/* Donation Summary */}
             <div className="bg-pink-50 border-2 border-pink-200 rounded-lg p-5 mb-8">
               <p className="text-sm text-gray-600 mb-3">
-                <strong>Donation Amount:</strong> ৳{finalAmount}
+                <strong>Donation Amount:</strong> ৳ {finalAmount}
               </p>
               <p className="text-sm text-gray-600 font-semibold text-pink-600">
                 Donation
@@ -574,7 +541,7 @@ export function DonationSection() {
 
             <div className="bg-pink-50 border-2 border-pink-200 rounded-lg p-4 sm:p-5 mb-6 sm:mb-8">
               <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
-                <strong>Amount:</strong> ৳{finalAmount}
+                <strong>Amount:</strong> ৳ {finalAmount}
               </p>
               <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
                 <strong>Last 3 Digit:</strong> {last3Digit}

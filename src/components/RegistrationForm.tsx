@@ -201,7 +201,7 @@ export function RegistrationForm({
   return (
     <section
       id="registration"
-      className="py-16 sm:py-20 bg-gradient-to-br from-emerald-50 via-white to-amber-50"
+      className="py-20 sm:py-28 bg-gradient-to-br from-emerald-50 via-white to-amber-50 overflow-x-hidden"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -405,7 +405,7 @@ export function RegistrationForm({
                         ).map(({ key, label, icon, desc }) => (
                           <label
                             key={key}
-                            className={`relative flex items-center gap-3 px-4 py-3 border-2 rounded-lg cursor-pointer transition-all select-none h-[3.5rem] ${
+                            className={`relative flex items-center gap-3 px-4 py-3 border-2 rounded-lg cursor-pointer transition-all select-none min-h-[3.5rem] h-auto ${
                               formData.package === key
                                 ? "border-emerald-500 bg-emerald-50 shadow-md ring-2 ring-emerald-100"
                                 : "border-gray-200 bg-white hover:border-emerald-300 hover:bg-gray-50 hover:shadow-sm"

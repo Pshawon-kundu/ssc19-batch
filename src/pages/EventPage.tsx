@@ -102,35 +102,13 @@ export function EventPage() {
   };
 
   const scrollToRegistration = () => {
-    console.log("=== SCROLL TO REGISTRATION CALLED ===");
-
     const element = document.getElementById("registration");
-    console.log("Found element:", element);
-
     if (element) {
-      // Get position
       const rect = element.getBoundingClientRect();
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
-      const targetY = rect.top + scrollTop - 100;
-
-      console.log("Scrolling to position:", targetY);
-
-      // Jump instantly
-      window.scrollTo({
-        top: targetY,
-        behavior: "auto",
-      });
-
-      console.log("✅ SCROLLED!");
-    } else {
-      console.error("❌ Registration element NOT FOUND!");
-      // Try to find it
-      const all = document.querySelectorAll("[id]");
-      console.log(
-        "All elements with IDs:",
-        Array.from(all).map((el) => el.id),
-      );
+      const targetY = rect.top + scrollTop - 80;
+      window.scrollTo({ top: targetY, behavior: "smooth" });
     }
   };
 
@@ -145,6 +123,9 @@ export function EventPage() {
         isLoading={isLoadingStats}
       />
 
+      {/* ── Section divider ── */}
+      <div className="h-2 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-200 opacity-40" />
+
       <Packages
         selectedPackage={selectedPackage}
         onSelectPackage={(pkg) => {
@@ -153,7 +134,13 @@ export function EventPage() {
         }}
       />
 
+      {/* ── Section divider ── */}
+      <div className="h-2 bg-gradient-to-r from-emerald-200 via-amber-300 to-emerald-200 opacity-40" />
+
       <Album />
+
+      {/* ── Section divider ── */}
+      <div className="h-2 bg-gradient-to-r from-amber-200 via-emerald-400 to-amber-200 opacity-40" />
 
       <RegistrationForm
         selectedPackage={selectedPackage}

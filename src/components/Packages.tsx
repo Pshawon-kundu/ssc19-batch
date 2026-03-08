@@ -75,11 +75,11 @@ export function Packages({ selectedPackage, onSelectPackage }: PackagesProps) {
   return (
     <section
       id="packages"
-      className="py-20 bg-gradient-to-br from-white to-emerald-50"
+      className="py-20 sm:py-28 bg-gradient-to-br from-white to-emerald-50 overflow-x-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Navigation Buttons */}
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0 mb-8 sm:mb-12">
           <motion.button
             whileHover={{ scale: 1.05, x: -4 }}
             whileTap={{ scale: 0.95 }}
@@ -95,11 +95,11 @@ export function Packages({ selectedPackage, onSelectPackage }: PackagesProps) {
             <span>Back to Home</span>
           </motion.button>
 
-          <div className="text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+          <div className="text-center order-first sm:order-none">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
               Choose Your Contribution
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-sm sm:text-base">
               Select the contribution that suits you best
             </p>
           </div>

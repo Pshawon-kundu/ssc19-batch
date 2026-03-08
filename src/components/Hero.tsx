@@ -30,7 +30,7 @@ export function Hero({
   return (
     <section
       id="home"
-      className="relative pt-20 pb-8 overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-amber-50"
+      className="relative pt-20 pb-8 overflow-x-hidden bg-gradient-to-br from-emerald-50 via-white to-amber-50"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
@@ -360,7 +360,7 @@ export function Hero({
               >
                 <Sparkles className="text-amber-500" size={32} />
               </motion.div>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-emerald-700 via-emerald-600 to-amber-600 bg-clip-text text-transparent drop-shadow-lg">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-emerald-700 via-emerald-600 to-amber-600 bg-clip-text text-transparent drop-shadow-lg">
                 Pilotian'19
               </h1>
               <motion.div
@@ -374,7 +374,7 @@ export function Hero({
             <motion.h2
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900"
+              className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900"
             >
               Iftar Party Reunion
             </motion.h2>
@@ -403,7 +403,7 @@ export function Hero({
                 scale: 1.05,
                 boxShadow: "0 20px 25px rgba(16, 185, 129, 0.3)",
               }}
-              className="flex items-center gap-4 bg-white px-8 py-4 rounded-2xl shadow-lg border-2 border-emerald-100"
+              className="flex items-center gap-3 sm:gap-4 bg-white w-full sm:w-auto px-5 sm:px-8 py-4 rounded-2xl shadow-lg border-2 border-emerald-100"
             >
               <Calendar className="text-emerald-600" size={28} />
               <div className="text-left">
@@ -420,7 +420,7 @@ export function Hero({
                 scale: 1.05,
                 boxShadow: "0 20px 25px rgba(59, 130, 246, 0.3)",
               }}
-              className="flex items-center gap-4 bg-white px-8 py-4 rounded-2xl shadow-lg border-2 border-blue-100"
+              className="flex items-center gap-3 sm:gap-4 bg-white w-full sm:w-auto px-5 sm:px-8 py-4 rounded-2xl shadow-lg border-2 border-blue-100"
             >
               <MapPin className="text-blue-600" size={28} />
               <div className="text-left">
@@ -450,17 +450,28 @@ export function Hero({
               <div className="relative z-10 space-y-3">
                 <div className="flex items-center justify-between">
                   <Users className="opacity-90" size={32} strokeWidth={1.5} />
-                  <div className="flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                    <TrendingUp size={16} />
-                    <span className="font-bold">
-                      {Math.round((totalRegistered / batchStrength) * 100)}%
-                    </span>
+                  {!isLoading && (
+                    <div className="flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                      <TrendingUp size={16} />
+                      <span className="font-bold">
+                        {Math.round((totalRegistered / batchStrength) * 100)}%
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {isLoading ? (
+                  <div className="space-y-2 animate-pulse">
+                    <div className="h-12 w-24 bg-white/30 rounded-xl" />
+                    <div className="h-4 w-36 bg-white/20 rounded-lg" />
                   </div>
-                </div>
-                <div className="text-5xl font-bold">{totalRegistered}</div>
-                <div className="text-emerald-100 text-sm font-medium">
-                  Out of {batchStrength} Registered
-                </div>
+                ) : (
+                  <>
+                    <div className="text-5xl font-bold">{totalRegistered}</div>
+                    <div className="text-emerald-100 text-sm font-medium">
+                      Out of {batchStrength} Registered
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
 
@@ -480,12 +491,21 @@ export function Hero({
                     BDT Tk
                   </span>
                 </div>
-                <div className="text-5xl font-bold">
-                  ৳{(totalMoney / 1000).toFixed(1)}K
-                </div>
-                <div className="text-amber-100 text-sm font-medium">
-                  Total Collected
-                </div>
+                {isLoading ? (
+                  <div className="space-y-2 animate-pulse">
+                    <div className="h-12 w-28 bg-white/30 rounded-xl" />
+                    <div className="h-4 w-32 bg-white/20 rounded-lg" />
+                  </div>
+                ) : (
+                  <>
+                    <div className="text-5xl font-bold">
+                      ৳{(totalMoney / 1000).toFixed(1)}K
+                    </div>
+                    <div className="text-amber-100 text-sm font-medium">
+                      Total Collected
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
           </motion.div>
@@ -512,24 +532,11 @@ export function Hero({
             />
 
             {/* Main CTA Button */}
-            <div className="relative z-50" style={{ pointerEvents: "auto" }}>
+            <div className="relative">
               <button
                 type="button"
-                onMouseDown={() => {
-                  console.log("MOUSE DOWN!");
-                }}
-                onClick={() => {
-                  console.log("=== BUTTON CLICKED! ===");
-                  console.log("onRegisterClick function:", onRegisterClick);
-                  if (typeof onRegisterClick === "function") {
-                    onRegisterClick();
-                    console.log("Function called successfully!");
-                  } else {
-                    console.error("onRegisterClick is not a function!");
-                  }
-                }}
-                className="relative w-full sm:w-auto inline-flex justify-center items-center gap-3 px-12 py-6 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 text-white rounded-full font-bold text-xl shadow-2xl hover:shadow-emerald-500/50 transition-all border-2 border-emerald-400 cursor-pointer hover:bg-emerald-600 active:scale-95"
-                style={{ pointerEvents: "auto", zIndex: 9999 }}
+                onClick={onRegisterClick}
+                className="relative w-full sm:w-auto inline-flex justify-center items-center gap-3 px-12 py-6 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 text-white rounded-full font-bold text-xl shadow-2xl hover:shadow-emerald-500/50 transition-all border-2 border-emerald-400 cursor-pointer hover:from-emerald-600 hover:to-emerald-800 active:scale-95"
               >
                 <span>Join the Reunion Now</span>
                 <ArrowDown size={24} strokeWidth={2.5} />
