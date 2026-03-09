@@ -338,8 +338,8 @@ export function RegistrationForm({
                         Phone Number <span className="text-red-500">*</span>
                       </label>
                       <div className="flex">
-                        <span className="inline-flex items-center h-[3.5rem] px-4 border-2 border-r-0 rounded-l-xl text-xs font-bold text-gray-500 bg-gray-50 border-gray-200 select-none shrink-0">
-                          +880
+                        <span className="inline-flex items-center h-[3.5rem] px-3 border-2 border-r-0 rounded-l-xl text-xs font-bold text-gray-500 bg-gray-50 border-gray-200 select-none shrink-0">
+                          +88
                         </span>
                         <input
                           type="tel"
